@@ -4,7 +4,7 @@ import java.util.Collection;
  * Responsible for keeping track of the Library's visitors and visits.
  */
 public class VisitorRegistry {
-    public Collection<Visitor> visitors;
+    private Collection<Visitor> visitors;
 
     public void beginVisit(int id){
 
