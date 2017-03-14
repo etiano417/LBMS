@@ -1,3 +1,7 @@
+package Transaction;
+
+import Transaction.Borrow;
+
 /**
  * Represents a single fine owed by a visitor.
  */

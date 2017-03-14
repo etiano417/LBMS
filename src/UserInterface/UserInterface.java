@@ -1,3 +1,5 @@
+package UserInterface;
+
 /**
  * Responsible for providing a user interface
  */

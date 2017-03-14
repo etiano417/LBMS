@@ -1,3 +1,5 @@
+package Clock;
+
 /**
  * Watches the clock for certain changes, and updates accordingly
  */

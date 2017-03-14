@@ -1,3 +1,8 @@
+package Transaction;
+
+import BookRegistry.Book;
+import VisitorRegistry.Visitor;
+
 import java.time.LocalDateTime;
 
 /**

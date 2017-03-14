@@ -1,7 +1,9 @@
+package BookRegistry;
+
 import java.time.*;
 
 /**
- * Created by Eric Tiano on 3/13/2017.
+ * Stores data on a single ISBN number.
  */
 public class Book {
     private int isbn;

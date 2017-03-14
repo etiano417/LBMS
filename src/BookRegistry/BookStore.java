@@ -1,3 +1,7 @@
+package BookRegistry;
+
+import BookRegistry.Book;
+
 import java.util.List;
 
 /**

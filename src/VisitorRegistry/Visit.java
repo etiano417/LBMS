@@ -1,3 +1,5 @@
+package VisitorRegistry;
+
 import java.time.*;
 /**
  * Stores data on a single visit.

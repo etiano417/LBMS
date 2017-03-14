@@ -1,3 +1,7 @@
+package VisitorRegistry;
+
+import BookRegistry.Book;
+
 import java.util.Collection;
 
 /**

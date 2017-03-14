@@ -1,8 +1,10 @@
+package Clock;
+
 import java.time.LocalTime;
 import java.util.Collection;
 
 /**
- * Created by Eric Tiano on 3/13/2017.
+ * Tracks the system time
  */
 public class Clock {
     private int hoursForward;

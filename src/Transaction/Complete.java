@@ -1,7 +1,11 @@
+package Transaction;
+
+import Transaction.BorrowState;
+
 /**
  * represents the state and behavior of a Borrow that is paid completely.
  */
-public class Complete implements BorrowState{
+public class Complete implements BorrowState {
 
     public void increaseFine() {
 
