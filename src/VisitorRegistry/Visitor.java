@@ -10,4 +10,5 @@ public class Visitor {
     private String address;
     private String phoneNumber;
     private int id;
+    List<Borrow> borrowing = new ArrayList<Borrow>();
 }
