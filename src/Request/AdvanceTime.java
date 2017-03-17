@@ -1,5 +1,7 @@
 package Request;
 
+import java.util.List;
+
 /**
  * A request to advance the system's clock forward
  */
@@ -7,18 +9,8 @@ public class AdvanceTime implements Request {
 
     public int numHours;
 
-    /**
-     *
-     */
-    public void executeCommand(){
-
+    public List<Object> executeCommand(){
+        return null;
     }
 
-    /**
-     *
-     * @param request
-     */
-    public void parseRequest(String request){
-
-    }
 }
