@@ -1,6 +1,7 @@
 package BookRegistry;
 
 import java.time.*;
+import java.util.List;
 
 /**
  * Stores data on a single ISBN number.
@@ -8,7 +9,7 @@ import java.time.*;
 public class Book {
     private int isbn;
     private String title;
-    private String author;
+    private List<String> authors;
     private String publisher;
     private LocalDate publishDate;
     private int pageCount;
