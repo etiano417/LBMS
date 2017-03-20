@@ -33,7 +33,7 @@ public class VisitorRegistry {
      * departure time.
      * @param id - The ID of the visitor in the collection
      */
-    public void endVisit(int id, LocalTime time){
+    public void endVisit(long id, LocalTime time){
         for (Visit v : visits) {
             if (v.getVisitorID() == id && v.isOngoing()) {
                 v.setDepartureTime(time);
@@ -47,7 +47,7 @@ public class VisitorRegistry {
      * @param id - The ID of the visitor
      * @param borrow - The transaction to be added to the visitor's transactions
      */
-    public void borrowBook(int id, Borrow borrow){
+    public void borrowBook(long id, Borrow borrow){
         for (Visitor v : visitors) {
             if (v.getVisitorID() == id && v.getBorrowing().size() < 5) {
                 borrow.setState(borrow.getOngoing());  //Placeholder for borrowState setter
@@ -62,7 +62,7 @@ public class VisitorRegistry {
      * @param id - Visitor id
      * @param borrow The borrow transaction
      */
-    public void returnBook(int id, Borrow borrow){
+    public void returnBook(long id, Borrow borrow){
         for (Visitor v : visitors) {
             if (v.getVisitorID() == id) {
                 borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
@@ -76,7 +76,7 @@ public class VisitorRegistry {
      * @param fine - The fine to be paid
      * @param amount - The amount paid towards the fine
      */
-    public void payFine(int id, Fine fine, int amount) {
+    public void payFine(long id, Fine fine, int amount) {
         for (Visitor v : visitors) {
             if (v.getVisitorID() == id) {
                 fine.fee -= amount;
@@ -91,7 +91,7 @@ public class VisitorRegistry {
      * Returns an ArrayList of the visitor's ongoing Borrow transactions.
      * @param id
      */
-    public ArrayList<Borrow> findBorrowedBooks(int id){
+    public ArrayList<Borrow> findBorrowedBooks(long id){
         for (Visitor v : visitors) {
             if (v.getVisitorID() == id) {
                 return v.getBorrowing();

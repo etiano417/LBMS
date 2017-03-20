@@ -23,7 +23,7 @@ public class Visit {
         ongoing = false;
     }
 
-    public int getVisitorID() {
+    public long getVisitorID() {
         return visitorID;
     }
 
