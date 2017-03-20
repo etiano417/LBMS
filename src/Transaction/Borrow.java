@@ -9,11 +9,20 @@ import java.time.LocalDateTime;
  * Stores information on a single borrow transaction.
  */
 public class Borrow {
-    public Book book;
-    public Visitor visitor;
-    public LocalDateTime checkedOut;
-    public LocalDateTime dueDate;
-    public LocalDateTime returned;
+    private Book book;
+    //public Visitor visitor;
+    private LocalDateTime checkedOut;
+    private LocalDateTime dueDate;
+    private LocalDateTime returned;
+    private BorrowState state;
+
+    public Borrow(Book _book, LocalDateTime _checkedOut){
+        state = new Ongoing();
+        book = _book;
+        checkedOut = _checkedOut;
+        dueDate = _checkedOut.plusDays(7);
+        returned = null;
+    }
 
     public String toString(){
         return super.toString();
