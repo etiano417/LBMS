@@ -9,29 +9,21 @@ import java.util.List;
 public class BookRegistry {
     private Collection<Book> books;
 
-    public List<Book> searchBooks(String name){
+    public List<Book> searchBooks(String name, List<Object> params){
         return null;
     }
 
-    public List<Book> searchBooks(String name, List<String> authors){
+    //public List<Book> searchBooks(String name, List<String> authors){return null;}
+
+    //public List<Book> searchBooks(String name, List<String> authors, int isbn){return null;}
+
+    public List<Book> searchBookStore(String name, List<Object> params){
         return null;
     }
 
-    public List<Book> searchBooks(String name, List<String> authors, int isbn){
-        return null;
-    }
+    //public List<Book> searchBookStore(String name, List<String> authors){return null}
 
-    public List<Book> searchBookStore(String name){
-        return null;
-    }
-
-    public List<Book> searchBookStore(String name, List<String> authors){
-        return null;
-    }
-
-    public List<Book> searchBookStore(String name, List<String> authors, int isbn){
-        return null;
-    }
+    //public List<Book> searchBookStore(String name, List<String> authors, int isbn){return null;}
 
     public Book lendBook(int isbn){
         return null;
