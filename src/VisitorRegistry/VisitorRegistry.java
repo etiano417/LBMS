@@ -20,22 +20,43 @@ public class VisitorRegistry {
      * The visitor with the given ID begins a visit.  A visit object is created.
      * The visit is given the visitor ID, the date, and the starting time.
      * @param id - The ID of the visitor in the collection
+     * @param beginTime - The time of the visitor's arrival
      */
-    public void beginVisit(long id, LocalDateTime beginTime){
+    public String beginVisit(String id, LocalDateTime beginTime){
+        //Check if the visitor already has an ongoing visit
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                return "duplicate";
+            }
+        }
+
+        //Check if the visitor is in the registry
+        boolean isInRegistry = false;
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(id)) {
+                isInRegistry = true;
+            }
+        }
+        if (!isInRegistry) {
+            return "invalid id";
+        }
+
         LocalDate visitDate = beginTime.toLocalDate();
         LocalTime visitTime = beginTime.toLocalTime();
         Visit newVisit = new Visit(id, visitDate, visitTime);
         visits.add(newVisit);
+        return "success";
     }
 
     /**
      * The visitor's visit ends.  The visitor's ongoing visit is given a
      * departure time.
      * @param id - The ID of the visitor in the collection
+     * @param time - The time the visit ends
      */
-    public void endVisit(long id, LocalTime time){
+    public void endVisit(String id, LocalTime time){
         for (Visit v : visits) {
-            if (v.getVisitorID() == id && v.isOngoing()) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
                 v.setDepartureTime(time);
             }
         }
@@ -47,10 +68,9 @@ public class VisitorRegistry {
      * @param id - The ID of the visitor
      * @param borrow - The transaction to be added to the visitor's transactions
      */
-    public void borrowBook(long id, Borrow borrow){
+    public void borrowBook(String id, Borrow borrow){
         for (Visitor v : visitors) {
-            if (v.getVisitorID() == id && v.getBorrowing().size() < 5) {
-                borrow.setState(borrow.getOngoing());  //Placeholder for borrowState setter
+            if (v.getVisitorID().equals(id) && v.getBorrowing().size() < 5) {
                 v.addBorrow(borrow);
             }
         }
@@ -62,9 +82,9 @@ public class VisitorRegistry {
      * @param id - Visitor id
      * @param borrow The borrow transaction
      */
-    public void returnBook(long id, Borrow borrow){
+    public void returnBook(String id, Borrow borrow){
         for (Visitor v : visitors) {
-            if (v.getVisitorID() == id) {
+            if (v.getVisitorID().equals(id)) {
                 borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
                 v.removeBorrow(borrow);
             }
@@ -77,9 +97,9 @@ public class VisitorRegistry {
      * @param fine - The fine to be paid
      * @param amount - The amount paid towards the fine
      */
-    public void payFine(long id, Fine fine, int amount) {
+    public void payFine(String id, Fine fine, int amount) {
         for (Visitor v : visitors) {
-            if (v.getVisitorID() == id) {
+            if (v.getVisitorID().equals(id)) {
                 fine.fee -= amount;
                 if (fine.fee <= 0) {
                     fine.paid = true;
@@ -92,9 +112,9 @@ public class VisitorRegistry {
      * Returns an ArrayList of the visitor's ongoing Borrow transactions.
      * @param id
      */
-    public ArrayList<Borrow> findBorrowedBooks(long id){
+    public ArrayList<Borrow> findBorrowedBooks(String id){
         for (Visitor v : visitors) {
-            if (v.getVisitorID() == id) {
+            if (v.getVisitorID().equals(id)) {
                 return v.getBorrowing();
             }
         }
@@ -103,9 +123,14 @@ public class VisitorRegistry {
 
     /**
      * Create a new visitor and add it to the collection
+     * @param firstName - The first name of the visitor
+     * @param lastName - Last name of the visitor
+     * @param address - Address of the visitor
+     * @param phoneNumber - Phone number of the visitor
      */
-    public void RegisterVisitor(String firstName, String lastName, String address, String phoneNumber) {
-
-        visitors.add(new Visitor(firstName, lastName, address, phoneNumber));
+    public String RegisterVisitor(String firstName, String lastName, String address, String phoneNumber) {
+        Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
+        visitors.add(newVisitor);
+        return newVisitor.getVisitorID();
     }
 }
