@@ -27,4 +27,8 @@ public class Borrow {
     public String toString(){
         return super.toString();
     }
+
+    public void advanceDay(){
+        //check if its due date or not
+    }
 }
