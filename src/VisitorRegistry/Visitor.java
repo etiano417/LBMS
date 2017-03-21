@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 
 public class Visitor {
+
+
     private String firstName;
     private String lastName;
     private String address;
@@ -45,6 +47,22 @@ public class Visitor {
 
     public String getVisitorID() {
         return visitorID;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phoneNumber;
     }
 
     public ArrayList<Borrow> getBorrowing() {
