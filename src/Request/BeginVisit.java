@@ -1,6 +1,9 @@
 package Request;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import LBMS.LBMS;
 
 /**
  * Records the time a visitor is beginning a visit.
@@ -12,9 +15,15 @@ public class BeginVisit implements Request{
         visitorID = _visitorID;
     }
 
-    //TODO
+    //needs to know if a visitor is already visiting when a visit occurs
     public List<Object> executeCommand(){
-        //LBMS.vr.beginVisit(visitorID);
-        return null;
+        LocalDateTime dt = LBMS.clock.getDateTime();
+        LBMS.vr.beginVisit(visitorID,dt);
+
+        List<Object> output = new ArrayList<Object>();
+        output.add(visitorID);
+        output.add(dt.toLocalDate());
+        output.add(dt.toLocalTime());
+        return output;
     }
 }

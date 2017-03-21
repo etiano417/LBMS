@@ -19,7 +19,7 @@ public class RegisterVisitor implements Request {
         phoneNumber = _phoneNumber;
     }
 
-    //TODO
+    //RegisterVisitor needs access to the visitor's id after registration
     public List<Object> executeCommand(){
         return null;
     }
