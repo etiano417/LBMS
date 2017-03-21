@@ -14,7 +14,7 @@ public class Visitor {
     private String address;
     private String phoneNumber;
     private long visitorID;
-    private ArrayList<Borrow> borrowing = new ArrayList<>();
+    private ArrayList<Borrow> borrows = new ArrayList<>();
 
     private static long idTracker = 0;
 
@@ -31,16 +31,12 @@ public class Visitor {
         lastName = last;
         address = add;
         phoneNumber = phone;
-        borrowing = new ArrayList<Borrow>(5);
+        borrows = new ArrayList<Borrow>();
         visitorID = idTracker++;
     }
 
     public void addBorrow(Borrow borrow) {
-        borrowing.add(borrow);
-    }
-
-    public void removeBorrow(Borrow borrow) {
-        borrowing.remove(borrow);
+        borrows.add(borrow);
     }
 
     public long getVisitorID() {
@@ -48,6 +44,12 @@ public class Visitor {
     }
 
     public ArrayList<Borrow> getBorrowing() {
+        ArrayList<Borrow> borrowing = new ArrayList<>(5);
+        for (Borrow b : borrows) {
+            if () {                                         //TODO: If the borrow's state is not 'Complete'
+                borrowing.add(b);
+            }
+        }
         return borrowing;
     }
 }
