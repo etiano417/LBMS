@@ -17,8 +17,8 @@ public class BorrowBook implements Request {
 
     public List<Object> executeCommand(){
         Book b = LBMS.br.borrowFromSearch(searchID);
-        LBMS.vr.borrowBook(visitorID,b);
-        //need access to due date. either borrowBook needs to either take a transaction or return one
+        //replace with transaction
+        //LBMS.vr.borrowBook(visitorID,b);
         return null;
     }
 }
