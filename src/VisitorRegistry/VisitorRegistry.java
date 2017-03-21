@@ -21,7 +21,7 @@ public class VisitorRegistry {
      * The visit is given the visitor ID, the date, and the starting time.
      * @param id - The ID of the visitor in the collection
      */
-    public void beginVisit(int id, LocalDateTime beginTime){
+    public void beginVisit(long id, LocalDateTime beginTime){
         LocalDate visitDate = beginTime.toLocalDate();
         LocalTime visitTime = beginTime.toLocalTime();
         Visit newVisit = new Visit(id, visitDate, visitTime);
@@ -66,6 +66,7 @@ public class VisitorRegistry {
         for (Visitor v : visitors) {
             if (v.getVisitorID() == id) {
                 borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
+                v.removeBorrow(borrow);
             }
         }
     }
