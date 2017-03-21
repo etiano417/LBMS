@@ -15,4 +15,20 @@ public class Book {
     private int pageCount;
     private int numCopies;
     private int numAvailable;
+
+    public String getTitle(){
+        return title;
+    }
+
+    public int getIsbn(){
+        return isbn;
+    }
+
+    public LocalDate getPublishDate(){
+        return publishDate;
+    }
+
+    public int getNumCopies(){
+        return numCopies;
+    }
 }
