@@ -7,11 +7,12 @@ import Transaction.BorrowState;
  */
 public class Overdue implements BorrowState {
     
-    public void increaseFine() {
-
+    public void increaseFine(Fine fine) {
+        //after the first day, fine increases by $10
+        //increases by $2 each following week
     }
 
-    public void returnBook(){
-
+    public boolean returnBook(){
+        return true;
     }
 }

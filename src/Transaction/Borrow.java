@@ -15,6 +15,11 @@ public class Borrow {
     private LocalDateTime dueDate;
     private LocalDateTime returned;
     private BorrowState state;
+    private Fine fine = null;
+
+    private Ongoing ongoing = new Ongoing();
+    private Overdue overdue = new Overdue();
+    private Complete complete = new Complete();
 
     public Borrow(Book _book, LocalDateTime _checkedOut){
         state = new Ongoing();
@@ -30,5 +35,6 @@ public class Borrow {
 
     public void advanceDay(){
         //check if its due date or not
+        overdue.increaseFine(fine);
     }
 }
