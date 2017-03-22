@@ -44,6 +44,10 @@ public class Borrow {
         state.increaseFine(fine, (daysPast-7));
     }
 
+    public boolean getOwesMoney() {
+        return state.owesMoney();
+    }
+
     public void returnBook(){
         if(state.returnBook())
             state=complete;

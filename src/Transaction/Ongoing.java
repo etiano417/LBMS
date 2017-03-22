@@ -14,4 +14,8 @@ public class Ongoing implements BorrowState {
     public boolean returnBook(){
         return true;
     }
+
+    public boolean owesMoney() {
+        return false;
+    }
 }
