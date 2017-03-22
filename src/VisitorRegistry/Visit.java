@@ -5,13 +5,13 @@ import java.time.*;
  * Stores data on a single visit.
  */
 public class Visit {
-    private long visitorID;
+    private String visitorID;
     private LocalDate dateOfVisit;
     private LocalTime timeOfArrival;
     private LocalTime timeOfDeparture;
     private boolean ongoing;
 
-    public Visit(long visId, LocalDate visitDate, LocalTime time) {
+    public Visit(String visId, LocalDate visitDate, LocalTime time) {
         visitorID = visId;
         dateOfVisit = visitDate;
         timeOfArrival = time;
@@ -23,7 +23,7 @@ public class Visit {
         ongoing = false;
     }
 
-    public long getVisitorID() {
+    public String getVisitorID() {
         return visitorID;
     }
 

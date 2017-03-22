@@ -9,12 +9,14 @@ import java.util.ArrayList;
  */
 
 public class Visitor {
+
+
     private String firstName;
     private String lastName;
     private String address;
     private String phoneNumber;
-    private long visitorID;
-    private ArrayList<Borrow> borrows = new ArrayList<>();
+    private String visitorID;
+    private ArrayList<Borrow> borrowing = new ArrayList<>();
 
     private static long idTracker = 0;
 
@@ -31,25 +33,43 @@ public class Visitor {
         lastName = last;
         address = add;
         phoneNumber = phone;
-        borrows = new ArrayList<Borrow>();
-        visitorID = idTracker++;
+        borrowing = new ArrayList<Borrow>();
+        visitorID = generateID(idTracker++);
     }
 
     public void addBorrow(Borrow borrow) {
-        borrows.add(borrow);
+        borrowing.add(borrow);
     }
 
-    public long getVisitorID() {
+    public void removeBorrow(Borrow borrow) {
+        borrowing.remove(borrow);
+    }
+
+    public String getVisitorID() {
         return visitorID;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhone() {
+        return phoneNumber;
+    }
+
     public ArrayList<Borrow> getBorrowing() {
-        ArrayList<Borrow> borrowing = new ArrayList<>(5);
-        for (Borrow b : borrows) {
-            if () {                                         //TODO: If the borrow's state is not 'Complete'
-                borrowing.add(b);
-            }
-        }
         return borrowing;
+    }
+
+    public String generateID(long id) {
+        return String.format("%010d", id);
     }
 }
