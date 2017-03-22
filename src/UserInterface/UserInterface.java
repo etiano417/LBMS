@@ -1,5 +1,6 @@
 package UserInterface;
 
+import BookRegistry.Book;
 import Request.CurrentDateAndTime;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,8 @@ import java.util.*;
  * Responsible for providing a user interface
  */
 public class UserInterface {
-
+    public static List<Book> librarySearch = new ArrayList<>();
+    public static List<Book> storeSearch = new ArrayList<>();
     HashMap<String, UICommand> requests = new HashMap<>();
     String buffer = "";
     Scanner input = new Scanner(System.in);
@@ -35,6 +37,11 @@ public class UserInterface {
         requests.put("datetime", new Datetime());
         requests.put("register", new Register());
         requests.put("arrive", new Arrive());
+        //Note: Depart does not work because the stored visit returns ongoing = false
+        //requests.put("depart", new Depart());
+        //requests.put("info", new Info());
+        requests.put("borrowed", new Borrowed());
+        requests.put("advance", new Advance());
     }
 
     /**
