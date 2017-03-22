@@ -22,7 +22,7 @@ public class Register implements UICommand {
 
         String visitorID = LBMS.vr.RegisterVisitor(params.get(0), params.get(1), params.get(2), params.get(3));
 
-        return String.format("register,%s,%s",visitorID,LBMS.clock.getDate());
+        return String.format("register,%s,%s;",visitorID,LBMS.clock.getDate());
 
 
     }

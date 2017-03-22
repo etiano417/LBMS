@@ -34,6 +34,7 @@ public class UserInterface {
 
         requests.put("datetime", new Datetime());
         requests.put("register", new Register());
+        requests.put("arrive", new Arrive());
     }
 
     /**
