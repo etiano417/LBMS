@@ -28,6 +28,14 @@ public class Borrow {
         return super.toString();
     }
 
+    public LocalDateTime getDueDate(){
+        return dueDate;
+    }
+
+    public Book getBook(){
+        return book;
+    }
+
     public void advanceDay(){
         //check if its due date or not
     }
