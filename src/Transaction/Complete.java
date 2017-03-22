@@ -14,4 +14,8 @@ public class Complete implements BorrowState {
     public boolean returnBook(){
         return false;
     }
+
+    public boolean owesMoney() {
+        return false;
+    }
 }

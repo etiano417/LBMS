@@ -58,7 +58,7 @@ public class VisitorRegistry {
     public LocalTime getVisiting(String id) {
         for (Visit v : visits) {
             if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                return v.getTimeOfArrival();
+                return true;
             }
         }
         return null;
@@ -93,7 +93,7 @@ public class VisitorRegistry {
 
     /**
      * The specified visitor borrows a book from the library.
-     * A new Borrowed object is created with an initial state of Ongoing.
+     * A new Borrow object is created with an initial state of Ongoing.
      * @param id - The ID of the visitor
      * @param borrow - The transaction to be added to the visitor's transactions
      */
@@ -110,13 +110,11 @@ public class VisitorRegistry {
                 if (v.getBorrowing().size() >= 5) {
                     bookLimitExceeded = true;
                 }
-                /**
-                for (Borrowed b : v.getBorrowing()) {
+                for (Borrow b : v.getBorrowing()) {
                     if (b.getOverdue()) {
                         hasOutstandingFine = true;
                     }
                 }
-                 */
                 if (isInRegistry && !bookLimitExceeded && !hasOutstandingFine) {
                     v.removeBorrow(borrow);
                 }
@@ -132,7 +130,7 @@ public class VisitorRegistry {
 
     /**
      * The specified visitor returns a checked out book to the library.
-     * The state of the Borrowed transaction becomes Complete
+     * The state of the Borrow transaction becomes Complete
      * @param id - Visitor id
      * @param borrow The borrow transaction
      */
@@ -140,12 +138,10 @@ public class VisitorRegistry {
         boolean isInRegistry = false;
         for (Visitor v : visitors) {
             isInRegistry = true;
-            /**
             if (v.getVisitorID().equals(id)) {
                 borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
                 v.removeBorrow(borrow);
             }
-             */
         }
 
         if(!isInRegistry) {
@@ -190,7 +186,7 @@ public class VisitorRegistry {
     }
 
     /**
-     * Returns an ArrayList of the visitor's ongoing Borrowed transactions.
+     * Returns an ArrayList of the visitor's ongoing Borrow transactions.
      * @param id
      */
     public ArrayList<Borrow> findBorrowedBooks(String id){
@@ -200,10 +196,6 @@ public class VisitorRegistry {
             }
         }
         return null;
-    }
-
-    public Collection<Visitor> getVisitors() {
-        return visitors;
     }
 
     /**

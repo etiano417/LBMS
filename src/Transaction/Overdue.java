@@ -16,4 +16,10 @@ public class Overdue implements BorrowState {
     public boolean returnBook(){
         return true;
     }
+
+    public boolean owesMoney() {
+        return true;
+    }
+
+
 }
