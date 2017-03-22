@@ -23,7 +23,7 @@ public class BorrowBook implements Request {
         Book b = LBMS.br.lendBook(isbn);
         //temporary
         LocalDateTime d = LBMS.clock.getDateTime();
-        Borrow t = new Borrow(b,d);
+        Borrow t = new Borrow(b,d.toLocalDate());
 
         List<Object> output = new ArrayList<>();
 
