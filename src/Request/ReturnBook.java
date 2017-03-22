@@ -5,6 +5,7 @@ import Transaction.Borrow;
 
 import java.util.ArrayList;
 import java.util.List;
+import LBMS.LBMS;
 
 /**
  * Handles all the processes involved in returning a book.
@@ -24,21 +25,28 @@ public class ReturnBook implements Request {
         List<Book> candidates = new ArrayList<>();
 
         List<Object> Borrows = fbb.executeCommand();
-        int location;
+        List<Integer> locations = new ArrayList<>();
 
         for(int i = 0; i < Borrows.size() ; i++ ){
             if(Borrows.get(i) instanceof Borrow){
                 Borrow b = (Borrow) Borrows.get(i);
 
-                if(b.getBook().equals ()){
-
+                if(books.contains(b.getBook())){
+                    locations.add(i);
+                    books.remove(b.getBook());
                 }
             }
         }
 
+        List<Object> output = new ArrayList<>();
 
+        for(Integer i : locations){
+            output.add(Borrows.get(i));
+            LBMS.vr.borrowBook(visitorID,(Borrow) Borrows.get(i));
+            LBMS.br.returnBook(((Borrow) Borrows.get(i)).getBook().getIsbn());
+        }
 
-        return();
+        return(output);
     }
 
 }
