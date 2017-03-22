@@ -21,7 +21,7 @@ public class BorrowBook implements Request {
     public List<Object> executeCommand(){
 
         Book b = LBMS.br.lendBook(isbn);
-        LocalDateTime d = LBMS.clock.getDateTime();
+        LocalDateTime d = LBMS.clock.getDate();
         Borrow t = new Borrow(b,d);
 
         List<Object> output = new ArrayList<>();
