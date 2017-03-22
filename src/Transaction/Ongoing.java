@@ -7,7 +7,7 @@ import Transaction.BorrowState;
  */
 public class Ongoing implements BorrowState {
 
-    public void increaseFine(Fine fine) {
+    public void increaseFine(Fine fine, int daysLate) {
         //doNothing
     }
 
