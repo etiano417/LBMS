@@ -20,7 +20,7 @@ public class BorrowBook implements Request {
 
     public List<Object> executeCommand(){
 
-        Book b = LBMS.br.lendBook(isbn);
+        Book b = LBMS.br.checkoutBook(isbn);
         //temporary
         LocalDateTime d = LBMS.clock.getDateTime();
         Borrow t = new Borrow(b,d.toLocalDate());

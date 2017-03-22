@@ -10,7 +10,7 @@ import java.util.Comparator;
 public class PublishDateComparator implements Comparator<Book> {
     public int compare(Book a, Book b){
         if (a.getPublishDate().compareTo(b.getPublishDate()) == 0){
-            return new Integer(a.getIsbn()).compareTo(new Integer(b.getIsbn()));
+            return new Long(a.getIsbn()).compareTo(new Long(b.getIsbn()));
         }
 
         return a.getPublishDate().compareTo(b.getPublishDate());

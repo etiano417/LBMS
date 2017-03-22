@@ -77,6 +77,10 @@ public class Book
         return isbn;
     }
 
+    public LocalDate getPublishDate(){
+        return publishDate;
+    }
+
     public int getNumAvailable(){
         return numAvailable;
     }

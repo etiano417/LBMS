@@ -75,7 +75,7 @@ public class Search implements Request {
             for(Book b : books){
 
                 //NOTE: may cause errors. Not entirely sure.
-                if(b.getNumCopies() == 0){
+                if(b.getNumAvailable() == 0){
                     books.remove(b);
                 }
             }
