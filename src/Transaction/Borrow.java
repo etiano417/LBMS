@@ -14,15 +14,16 @@ public class Borrow {
     private LocalDate checkedOut;
     private LocalDate dueDate;
     private LocalDate returned;
-    private BorrowState state;
-    private Fine fine = null;
+    private int daysPast = 0;
 
     private Ongoing ongoing = new Ongoing();
     private Overdue overdue = new Overdue();
     private Complete complete = new Complete();
+    private BorrowState state = ongoing;
+
+    private Fine fine = null;
 
     public Borrow(Book _book, LocalDate _checkedOut){
-        state = new Ongoing();
         book = _book;
         checkedOut = _checkedOut;
         dueDate = _checkedOut.plusDays(7);
@@ -34,17 +35,18 @@ public class Borrow {
     }
 
     public void advanceDay(){
+        daysPast++;
         //check if its due date or not
-        overdue.increaseFine(fine);
+        if(state.equals(ongoing)) {
+            if(daysPast>7)
+                state = overdue;
+        }
+        state.increaseFine(fine, (daysPast-7));
     }
 
-    public int getDaysPast(){
-        LocalDate ticker = LocalDate.of(checkedOut.getYear(), checkedOut.getMonth(), checkedOut.getDayOfMonth());
-        int count = 0;
-        while(!ticker.equals(dueDate)) {
-            ticker.plusDays(1);
-            count++;
-        }
-        return count;
+    public void returnBook(){
+        if(state.returnBook())
+            state=complete;
     }
+
 }
