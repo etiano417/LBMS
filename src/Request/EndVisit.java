@@ -12,7 +12,6 @@ public class EndVisit implements Request{
         visitorID = _visitorID;
     }
 
-    //TODO
     public List<Object> executeCommand(){
         //LBMS.vr.endVisit(visitorID);
         return null;
