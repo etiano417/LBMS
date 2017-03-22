@@ -11,7 +11,7 @@ import java.util.*;
 public class UserInterface {
 
     HashMap<String, UICommand> requests = new HashMap<>();
-    String buffer;
+    String buffer = "";
     Scanner input = new Scanner(System.in);
 
     /**
@@ -33,6 +33,7 @@ public class UserInterface {
     private void setup(){
 
         requests.put("datetime", new Datetime());
+        requests.put("register", new Register());
     }
 
     /**
