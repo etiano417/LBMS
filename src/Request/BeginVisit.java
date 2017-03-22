@@ -24,7 +24,7 @@ public class BeginVisit implements Request{
 
         if(result.equals("duplicate")){
             output.add(new Problem("duplicate","A visitor with the id is already visiting the library."));
-            return output
+            return output;
         }
 
         if(result.equals("invalid id")){
