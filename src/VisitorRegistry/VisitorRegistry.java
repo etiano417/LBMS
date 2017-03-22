@@ -35,7 +35,7 @@ public class VisitorRegistry {
             return "invalid id";
         }
 
-        //Check if the visitor already has an ongoing visit
+        //Make sure visitor isn't already performing a visit
         for (Visit v : visits) {
             if (v.getVisitorID().equals(id) && v.isOngoing()) {
                 return "duplicate";
@@ -51,20 +51,34 @@ public class VisitorRegistry {
     }
 
     /**
+     * Checks if the visitor is in the library
+     * @param id - ID of the visitor
+     * @return True if the visitor has any going visits
+     */
+    public boolean getVisiting(String id) {
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * The visitor's visit ends.  The visitor's ongoing visit is given a
      * departure time.
      * @param id - The ID of the visitor in the collection
      * @param time - The time the visit ends
      */
     public String endVisit(String id, LocalTime time){
-        //Check if the visitor is in the registry
-        boolean isInRegistry = false;
-        for (Visitor v : visitors) {
-            if (v.getVisitorID().equals(id)) {
-                isInRegistry = true;
+        //Check if the visitor is already visiting
+        boolean isVisiting = false;
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                isVisiting = true;
             }
         }
-        if (!isInRegistry) {
+        if (!isVisiting) {
             return "invalid id";
         }
 
