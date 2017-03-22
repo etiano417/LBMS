@@ -34,8 +34,12 @@ public class Borrow {
         return super.toString();
     }
 
-    public LocalDateTime getDueDate(){
+    public LocalDate getDueDate(){
         return dueDate;
+    }
+
+    public LocalDate getCheckedOut(){
+        return checkedOut;
     }
 
     public Book getBook(){

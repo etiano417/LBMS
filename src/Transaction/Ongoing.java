@@ -3,7 +3,7 @@ package Transaction;
 import Transaction.BorrowState;
 
 /**
- * represents the state and behavior of a Borrow that is ongoing.
+ * represents the state and behavior of a Borrowed that is ongoing.
  */
 public class Ongoing implements BorrowState {
 

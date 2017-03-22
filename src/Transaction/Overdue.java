@@ -3,7 +3,7 @@ package Transaction;
 import Transaction.BorrowState;
 
 /**
- * represents the state and behavior of a Borrow that is overdue.
+ * represents the state and behavior of a Borrowed that is overdue.
  */
 public class Overdue implements BorrowState {
     

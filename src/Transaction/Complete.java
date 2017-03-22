@@ -3,7 +3,7 @@ package Transaction;
 import Transaction.BorrowState;
 
 /**
- * represents the state and behavior of a Borrow that is paid completely.
+ * represents the state and behavior of a Borrowed that is paid completely.
  */
 public class Complete implements BorrowState {
 
