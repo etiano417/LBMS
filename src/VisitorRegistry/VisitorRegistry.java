@@ -55,13 +55,13 @@ public class VisitorRegistry {
      * @param id - ID of the visitor
      * @return True if the visitor has any going visits
      */
-    public LocalTime getVisiting(String id) {
+    public boolean getVisiting(String id) {
         for (Visit v : visits) {
             if (v.getVisitorID().equals(id) && v.isOngoing()) {
                 return true;
             }
         }
-        return null;
+        return false;
     }
 
     /**
@@ -111,7 +111,7 @@ public class VisitorRegistry {
                     bookLimitExceeded = true;
                 }
                 for (Borrow b : v.getBorrowing()) {
-                    if (b.getOverdue()) {
+                    if (b.getOwesMoney()) {
                         hasOutstandingFine = true;
                     }
                 }
@@ -139,7 +139,7 @@ public class VisitorRegistry {
         for (Visitor v : visitors) {
             isInRegistry = true;
             if (v.getVisitorID().equals(id)) {
-                borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
+                borrow.returnBook();
                 v.removeBorrow(borrow);
             }
         }
@@ -224,5 +224,10 @@ public class VisitorRegistry {
         Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
+
+    }
+
+    public Collection<Visitor> getVisitors(){
+        return visitors;
     }
 }
