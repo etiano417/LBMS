@@ -77,6 +77,10 @@ public class Book
         return isbn;
     }
 
+    public int getNumAvailable(){
+        return numAvailable;
+    }
+
     @Override
     public String toString()
     {
