@@ -1,6 +1,8 @@
 package Request;
 
+import java.util.ArrayList;
 import java.util.List;
+import LBMS.LBMS;
 
 /**
  * Registers a new visitor in the system.
@@ -19,8 +21,15 @@ public class RegisterVisitor implements Request {
         phoneNumber = _phoneNumber;
     }
 
-    //RegisterVisitor needs access to the visitor's id after registration
+    //TODO handle duplicate user error
     public List<Object> executeCommand(){
-        return null;
+        List<Object> output = new ArrayList<Object>();
+
+        String id = LBMS.vr.RegisterVisitor(firstName,lastName,address,phoneNumber);
+
+        output.add(id);
+        output.add(LBMS.clock.getDate());
+
+        return output;
     }
 }
