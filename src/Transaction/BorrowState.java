@@ -6,4 +6,5 @@ package Transaction;
 public interface BorrowState {
     void increaseFine(Fine fine, int daysLate);
     boolean returnBook();
+    boolean owesMoney();
 }

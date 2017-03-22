@@ -111,12 +111,12 @@ public class VisitorRegistry {
                     bookLimitExceeded = true;
                 }
                 for (Borrow b : v.getBorrowing()) {
-                    if (b.getOverdue()) {
+                    if (b.getOwesMoney()) {
                         hasOutstandingFine = true;
                     }
                 }
-                if (isInRegistry && !bookLimitExceeded && !hasOutstandingFine) {
-                    v.removeBorrow(borrow);
+                if (!bookLimitExceeded && !hasOutstandingFine) {
+                    v.addBorrow(borrow);
                 }
             }
         }
@@ -139,12 +139,12 @@ public class VisitorRegistry {
         for (Visitor v : visitors) {
             isInRegistry = true;
             if (v.getVisitorID().equals(id)) {
-                borrow.setState(borrow.getComplete());  //Placeholder for borrowState setter
+                borrow.returnBook();  //Placeholder for borrowState setter
                 v.removeBorrow(borrow);
             }
         }
 
-        if(!isInRegistry) {
+        if (!isInRegistry) {
             return "invalid id";
         }
 
@@ -170,9 +170,10 @@ public class VisitorRegistry {
 
         //Check if amount paid is negative or if amount exceeds the fine
         if (amount < 0 || amount > fine.fee) {
-            return "invalid visitor id";
+            return "invalid amount";
         }
 
+        //Pay the fine
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(id)) {
                 fine.fee -= amount;
@@ -224,5 +225,9 @@ public class VisitorRegistry {
         Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
+    }
+
+    public Collection<Visitor> getVisitors() {
+        return visitors;
     }
 }
