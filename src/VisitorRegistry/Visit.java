@@ -27,6 +27,10 @@ public class Visit {
         return visitorID;
     }
 
+    public LocalTime getTimeOfArrival(){
+        return timeOfArrival;
+    }
+
     public boolean isOngoing() {
         return ongoing;
     }
