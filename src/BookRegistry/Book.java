@@ -63,6 +63,10 @@ public class Book
         return title;
     }
 
+    public long getIsbn(){
+        return isbn;
+    }
+
     public List<String> getAuthors()
     {
         return authors;
