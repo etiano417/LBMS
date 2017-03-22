@@ -3,7 +3,7 @@ package Transaction;
 import BookRegistry.Book;
 import VisitorRegistry.Visitor;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
  * Stores information on a single borrow transaction.
@@ -11,9 +11,9 @@ import java.time.LocalDateTime;
 public class Borrow {
     private Book book;
     //public Visitor visitor;
-    private LocalDateTime checkedOut;
-    private LocalDateTime dueDate;
-    private LocalDateTime returned;
+    private LocalDate checkedOut;
+    private LocalDate dueDate;
+    private LocalDate returned;
     private BorrowState state;
     private Fine fine = null;
 
@@ -21,7 +21,7 @@ public class Borrow {
     private Overdue overdue = new Overdue();
     private Complete complete = new Complete();
 
-    public Borrow(Book _book, LocalDateTime _checkedOut){
+    public Borrow(Book _book, LocalDate _checkedOut){
         state = new Ongoing();
         book = _book;
         checkedOut = _checkedOut;
@@ -36,5 +36,15 @@ public class Borrow {
     public void advanceDay(){
         //check if its due date or not
         overdue.increaseFine(fine);
+    }
+
+    public int getDaysPast(){
+        LocalDate ticker = LocalDate.of(checkedOut.getYear(), checkedOut.getMonth(), checkedOut.getDayOfMonth());
+        int count = 0;
+        while(!ticker.equals(dueDate)) {
+            ticker.plusDays(1);
+            count++;
+        }
+        return count;
     }
 }
