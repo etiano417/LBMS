@@ -11,9 +11,48 @@ import java.util.Collection;
 public class Clock {
     private long hoursForward;
     private Collection<ClockObserver> observers;
-    private LocalTime closeTime;
     private LocalTime openTime;
+    private LocalTime closeTime;
+    
+    /**
+     * Constructor for Clock
+     */
+    public Clock(long hoursForward, Collection<ClockObserver> observers, String openTime, String closeTime){
+    	this.hoursForward = hoursForward;
+    	this.observers = observers;
+    	this.openTime = LocalTime.parse(openTime);		// "08:00:00" -> LocalTime object
+    	this.closeTime = LocalTime.parse(closeTime);	// "19:00:00" -> LocalTime object
+    }
+    
+    /**
+     * Accessor for closeTime
+     */
+    public LocalTime getCloseTime() {
+		return closeTime;
+	}
 
+    /**
+     * Mutator for closeTime
+     */
+	public void setCloseTime(LocalTime closeTime) {
+		this.closeTime = closeTime;
+	}
+
+	 /**
+     * Accessor for openTime
+     */
+	public LocalTime getOpenTime() {
+		return openTime;
+	}
+
+	/**
+     * Mutator for openTime
+     */
+	public void setOpenTime(LocalTime openTime) {
+		this.openTime = openTime;
+	}
+
+	
     /**
      * adds hours to the clock's number of hoursForward
      * @param hours the number of hours that should be added
