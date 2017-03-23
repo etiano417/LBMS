@@ -50,8 +50,10 @@ public class Borrow {
         daysPast++;
         //check if its due date or not
         if(state.equals(ongoing)) {
-            if(daysPast>7)
+            if(daysPast>7) {
                 state = overdue;
+                //fine = new Fine()
+            }
         }
         state.increaseFine(fine, (daysPast-7));
     }

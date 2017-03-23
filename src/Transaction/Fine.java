@@ -10,6 +10,12 @@ public class Fine {
     public int fee;
     public boolean paid;
 
+    public Fine(Borrow t){
+        transaction = t;
+        fee = 10;
+        paid = false;
+    }
+
     public String toString(){
         return super.toString();
     }
