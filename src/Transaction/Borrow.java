@@ -52,7 +52,7 @@ public class Borrow {
         if(state.equals(ongoing)) {
             if(daysPast>7) {
                 state = overdue;
-                //fine = new Fine()
+                fine = new Fine(this);
             }
         }
         state.increaseFine(fine, (daysPast-7));
