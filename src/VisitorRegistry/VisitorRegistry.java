@@ -224,7 +224,6 @@ public class VisitorRegistry {
         Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
-
     }
 
     public Collection<Visitor> getVisitors(){
