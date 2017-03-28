@@ -1,6 +1,7 @@
 package UserInterface;
 
 import Request.BeginVisit;
+import Request.Problem;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -17,6 +18,10 @@ public class Arrive implements UICommand {
         }
 
         List<Object> results = new BeginVisit(params.get(0)).executeCommand();
+
+        if(results.get(0) instanceof Problem){
+            return String.format("arrive,%s;",((Problem) results.get(0)).getType());
+        }
 
         String id = (String) results.get(0);
         LocalDate visitDate = (LocalDate) results.get(1);
