@@ -27,6 +27,10 @@ public class RegisterVisitor implements Request {
 
         String id = LBMS.vr.RegisterVisitor(firstName,lastName,address,phoneNumber);
 
+        if(id == "duplicate"){
+            output.add(new Problem("duplicate","A visitor with the same name, address, and phone number is already " +
+                    "registered."));
+        }
         output.add(id);
         output.add(LBMS.clock.getDate());
 
