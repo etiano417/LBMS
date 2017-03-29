@@ -34,15 +34,22 @@ public class Search implements Request {
         if(!params.isEmpty() && params.get(0) instanceof Integer){
             isbn = Optional.of((Integer) params.get(0));
         } else if(!params.isEmpty()) {
+            isbn = Optional.empty();
             params.remove(0);
+        } else {
+            isbn = Optional.empty();
         }
 
         if(!params.isEmpty() && params.get(0) instanceof String) {
             publisher = Optional.of((String) params.get(0));
+        } else {
+            publisher = Optional.empty();
         }
 
         if(!params.isEmpty() && params.get(0) instanceof String) {
             sortOrder = Optional.of((String) params.get(0));
+        } else {
+            sortOrder = Optional.empty();
         }
     }
 
