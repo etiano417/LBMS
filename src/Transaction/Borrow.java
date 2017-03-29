@@ -62,6 +62,14 @@ public class Borrow {
         return state.owesMoney();
     }
 
+    public String getState(){
+        if(state.equals(overdue))
+            return "overdue";
+        else if(state.equals(ongoing))
+            return "ongoing";
+        return "complete";
+    }
+
     public void returnBook(){
         if(state.returnBook())
             state=complete;
