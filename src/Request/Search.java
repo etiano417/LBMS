@@ -23,13 +23,17 @@ public class Search implements Request {
 
         authors = new ArrayList<String>();
 
-        while(!params.isEmpty() && params.get(0) instanceof String){
-            if(params.get(0) == "*") {
+        if(!(params.get(0).equals("*"))) {
+
+            while (!params.isEmpty() && params.get(0) instanceof String) {
+                if (params.get(0).equals("*")) {
+                    break;
+                }
+                authors.add((String) params.get(0));
                 params.remove(0);
-                break;
             }
+        } else {
             params.remove(0);
-            authors.add((String)params.get(0));
         }
         if(!params.isEmpty() && params.get(0) instanceof Integer){
             isbn = Optional.of((Integer) params.get(0));
