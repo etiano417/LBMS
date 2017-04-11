@@ -23,15 +23,15 @@ public class EndVisit implements Request{
 
         LBMS.vr.endVisit(visitorID, endTime.toLocalTime());
 
-        LocalTime startTime = LBMS.vr.getVisiting(visitorID);
+        //LocalTime startTime = LBMS.vr.getVisiting(visitorID);
 
-        Duration length = Duration.between(startTime,endTime);
+        //Duration length = Duration.between(startTime,endTime);
 
         List<Object> output = new ArrayList<>();
 
         output.add(visitorID);
         output.add(endTime);
-        output.add(length);
+        //output.add(length);
 
         return null;
     }

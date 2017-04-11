@@ -1,16 +1,16 @@
 package UserInterface;
 
 import BookRegistry.Book;
+import Request.BookStoreSearch;
 import Request.LibraryBookSearch;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Performs a Library Book Search.
  */
-public class Info implements UICommand {
+public class Search implements UICommand {
 
     public String perform(List<String> params) {
         List<Object> input = new ArrayList<>();
@@ -37,7 +37,7 @@ public class Info implements UICommand {
             }
         }
 
-        List<Object> results = new LibraryBookSearch(title,input).executeCommand();
+        List<Object> results = new BookStoreSearch(title,input).executeCommand();
 
         List<Book> books = new ArrayList<>();
 

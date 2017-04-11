@@ -31,7 +31,7 @@ public class UserRegistry {
      */
     public User getUser(String username, String password){
         User user = users.get(username);
-        if(user.isPassword(password)){
+        if(user != null && user.isPassword(password)){
             return user;
         }
             else return null;
@@ -39,8 +39,6 @@ public class UserRegistry {
 
     /**
      * adds a user with the given attributes.
-     *
-     *
      *
      * @param   username the username of the user
      * @param   password the password of the user
@@ -72,10 +70,28 @@ public class UserRegistry {
     }
 
     /**
-     * Tells whether the given id belongs to an employee
+     * Tells whether the given client id is logged in
      *
-     * @param id
-     * @return
+     * @param id A client's id
+     * @return true if the given client is logged in, false if not
+     */
+    public boolean isUser(String id){
+
+        Iterator<User> iterate = users.values().iterator();
+        for(User u : users.values()){
+            if (u.getId().equals(id)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Tells whether the given client id belongs to an employee
+     *
+     * @param id A client's id
+     * @return true if the given client is logged in as an employee, false if not
      */
     public boolean isEmployee(String id){
 

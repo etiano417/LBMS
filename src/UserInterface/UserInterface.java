@@ -1,6 +1,7 @@
 package UserInterface;
 
 import BookRegistry.Book;
+import Request.ClientConnect;
 import Request.CurrentDateAndTime;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,12 @@ public class UserInterface {
         setup();
         greeting();
         timestamp();
+        ClientConnect cc = new ClientConnect();
+        String cid = (String)cc.executeCommand().get(0);
+        System.out.println(String.format("Client ID: %s",cid));
+        System.out.print(String.format("Client #%s: ",cid));
         while(input.hasNext()){
+            System.out.print(String.format("Client #%s: ",cid));
             submit(input.nextLine());
         }
         exit();
@@ -39,9 +45,10 @@ public class UserInterface {
         requests.put("arrive", new Arrive());
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());
-        //requests.put("info", new Info());
+        requests.put("info", new Info());
         requests.put("borrowed", new Borrowed());
         requests.put("advance", new Advance());
+        requests.put("search", new Search());
     }
 
     /**

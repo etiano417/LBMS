@@ -24,9 +24,19 @@ public class UserRegistryTest {
 
         //Test getting a user
         assert ur.getUser("John","Password").getId().equals("0000");
-        assert ur.getUser("Jones","Password").getId().equals(null);
+        assert ur.getUser("Jones","Password") == null;
 
         //Testing to see if connecting works
         assert ur.connect() instanceof String;
+
+        //Testing to see if user permissions checking works
+        assert ur.isUser("0000");
+        assert ! ur.isUser("0006");
+
+        //Testing to see if employee permissions checking works
+        assert ur.isEmployee("0000");
+        assert ! ur.isEmployee("0006");
+        ur.addUser("Joe","Pass","0003",false);
+        assert ! ur.isEmployee("0003");
     }
 }
