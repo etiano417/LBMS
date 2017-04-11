@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static LBMS.LBMS.ur;
+import LBMS.LBMS;
 
 /**
  * A request to connect to the system.
@@ -17,7 +17,7 @@ public class ClientConnect implements Request{
      */
     public List<Object> executeCommand(){
         List<Object> output = new ArrayList<>();
-        output.add(ur.connect());
+        output.add(LBMS.ur.connect());
         return output;
     }
 
