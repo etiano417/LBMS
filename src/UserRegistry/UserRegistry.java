@@ -1,8 +1,6 @@
 package UserRegistry;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
 
@@ -15,7 +13,14 @@ public class UserRegistry {
     private static final String E2 = "duplicate-id";
     //private static final String E3 = "invalid-id"; check this at request level
 
+    //maps usernames to users
     private Map<String,User> users = new HashMap<>();
+    //maps client ids to users
+    private Map<String,User> clients = new HashMap<>();
+    //generates client ids
+    private ClientIDGenerator cig = new ClientIDGenerator();
+    //notes clients without logged in users (may not be used if we can auto-fill client id)
+    private List<String> userlessClients = new ArrayList<>();
 
     /**
      * When given a username and password, returns the cooresponding user.
@@ -35,11 +40,17 @@ public class UserRegistry {
     /**
      * adds a user with the given attributes.
      *
-     * @param username the username of the user
-     * @param password the password of the user
-     * @param id the id of the user's visitor
-     * @param employee whether the user is an employee or not
-     * @return a string noting what error, if any, occurred
+     *
+     *
+     * @param   username the username of the user
+     * @param   password the password of the user
+     * @param   id the id of the user's visitor
+     * @param   employee whether the user is an employee or not
+     * @return  A string noting what error, if any, occurred
+     *
+     *          Returns "duplicate-username" if the username is taken
+     *          Returns "duplicate-id" if the visitor id is taken
+     *          Returns "success" otherwise
      */
     public String addUser(String username, String password, String id, boolean employee){
 
@@ -76,5 +87,9 @@ public class UserRegistry {
         }
 
         return false;
+    }
+
+    public String connect(){
+        return cig.newId();
     }
 }
