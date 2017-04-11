@@ -6,6 +6,7 @@ import Clock.ClockObserver;
 import VisitorRegistry.VisitorRegistry;
 import BookRegistry.BookRegistry;
 import BookRegistry.BookStoreTextDatabase;
+import UserRegistry.UserRegistry;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class LBMS {
     public static Clock clock;
     public static VisitorRegistry vr;
     public static BookRegistry br;
+    public static UserRegistry ur;
 
     public static void main(String[] args){
 
@@ -26,6 +28,8 @@ public class LBMS {
         vr = new VisitorRegistry();
 
         br = new BookRegistry(new BookStoreTextDatabase(new File("books.txt")));
+
+        ur = new UserRegistry();
 
         UserInterface UI = new UserInterface();
 
