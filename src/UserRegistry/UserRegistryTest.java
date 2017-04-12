@@ -38,5 +38,10 @@ public class UserRegistryTest {
         assert ! ur.isEmployee("0006");
         ur.addUser("Joe","Pass","0003",false);
         assert ! ur.isEmployee("0003");
+
+        //Testing to see if connection checking works
+        String id = ur.connect();
+        assert ur.isConnected(id);
+        assert !ur.isConnected("thiswillneverwork");
     }
 }

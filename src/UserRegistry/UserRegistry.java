@@ -106,6 +106,13 @@ public class UserRegistry {
     }
 
     public String connect(){
-        return cig.newId();
+        String id = cig.newId();
+        clients.put(id,new User());
+        return id;
+    }
+
+    public boolean isConnected(String clientId){
+        return clients.keySet().contains(clientId);
     }
 }
+

@@ -24,6 +24,12 @@ public class User {
 
     }
 
+    public User(){
+        password = "";
+        id = "";
+        employee = false;
+    }
+
     public boolean isPassword(String _password){
         return password.equals(_password);
     }
