@@ -17,6 +17,15 @@ public class VisitorRegistry {
 
 
     /**
+     * Gives access to the collection of visitors
+     * @return visitor collection
+     */
+    public Collection<Visitor> getVisitors(){
+        return visitors;
+    }
+
+
+    /**
      * The visitor with the given ID begins a visit.  A visit object is created.
      * The visit is given the visitor ID, the date, and the starting time.
      * @param id - The ID of the visitor in the collection
@@ -141,6 +150,7 @@ public class VisitorRegistry {
             if (v.getVisitorID().equals(id)) {
                 borrow.returnBook();
                 v.removeBorrow(borrow);
+                v.changeAmountOwed(borrow.getFee());
             }
         }
 
@@ -153,10 +163,9 @@ public class VisitorRegistry {
 
     /**
      * @param id - Visitor id
-     * @param fine - The fine to be paid
      * @param amount - The amount paid towards the fine
      */
-    public String payFine(String id, Fine fine, int amount) {
+    public String payFine(String id, int amount) {
         //Check if the visitor is in the registry
         boolean isInRegistry = false;
         for (Visitor v : visitors) {
@@ -169,16 +178,15 @@ public class VisitorRegistry {
         }
 
         //Check if amount paid is negative or if amount exceeds the fine
-        if (amount < 0 || amount > fine.fee) {
-            return "invalid visitor id";
-        }
+        if (amount < 0)
+            return "invalid amount";
 
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(id)) {
-                fine.fee -= amount;
-                if (fine.fee == 0) {
-                    fine.paid = true;
-                }
+                //Check if amount paid exceeds amount owed
+                if (amount > v.getAmountOwed())
+                    return "invalid amount";
+                v.changeAmountOwed(amount * -1);
             }
         }
 
@@ -187,7 +195,7 @@ public class VisitorRegistry {
 
     /**
      * Returns an ArrayList of the visitor's ongoing Borrow transactions.
-     * @param id
+     * @param id Visitor ID
      */
     public ArrayList<Borrow> findBorrowedBooks(String id){
         for (Visitor v : visitors) {
@@ -224,9 +232,5 @@ public class VisitorRegistry {
         Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
-    }
-
-    public Collection<Visitor> getVisitors(){
-        return visitors;
     }
 }

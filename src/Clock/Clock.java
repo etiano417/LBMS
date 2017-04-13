@@ -19,9 +19,9 @@ public class Clock {
      */
     public Clock(long hoursForward, Collection<ClockObserver> observers, String openTime, String closeTime){
     	this.hoursForward = hoursForward;
-    	this.observers = observers;
-    	this.openTime = LocalTime.parse(openTime);		// "08:00:00" -> LocalTime object
-    	this.closeTime = LocalTime.parse(closeTime);	// "19:00:00" -> LocalTime object
+        this.observers = observers;
+        this.openTime = LocalTime.parse(openTime);		// "08:00:00" -> LocalTime object
+        this.closeTime = LocalTime.parse(closeTime);	// "19:00:00" -> LocalTime object
     }
     
     /**

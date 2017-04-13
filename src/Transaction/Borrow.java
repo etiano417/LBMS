@@ -46,6 +46,13 @@ public class Borrow {
         return book;
     }
 
+    public int getFee() {
+        if (this.fine != null)
+            return fine.fee;
+        else
+            return 0;
+    }
+
     public void advanceDay(){
         daysPast++;
         //check if its due date or not
