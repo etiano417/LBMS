@@ -52,6 +52,7 @@ public class UserInterface {
         requests.put("login", new Login());
         requests.put("datetime", new Datetime());
         requests.put("search", new Search());
+        requests.put("disconnect", new Disconnect());
         //requests.put("arrive", new Arrive());
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());
