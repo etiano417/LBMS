@@ -15,4 +15,7 @@ public class BookStoreSearch extends Search {
     public List<Book> bookList(List<Object> params){
         return LBMS.br.searchBookStore(title,params);
     }
+    public void setUserSelection(List<Long> books){
+        LBMS.ur.setStoreSelection(super.clientId,books);
+    }
 }

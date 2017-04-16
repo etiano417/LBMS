@@ -11,19 +11,24 @@ import java.util.Optional;
 /**
  * Searches for books owned by the library and available for borrowing by visitors.
  */
-public class Search implements Request {
-    String title;
-    List<String> authors;
-    Optional<Integer> isbn;
-    Optional<String> publisher;
-    Optional<String> sortOrder;
+public abstract class Search implements Request {
+
+    private List<String> authors;
+    private Optional<Long> isbn;
+    private Optional<String> publisher;
+    private Optional<String> sortOrder;
+
+    protected String title;
+    protected String clientId;
 
     public Search(String _title, List<Object> params){
         title = _title;
 
         authors = new ArrayList<String>();
 
-        if(!(params.get(0).equals("*"))) {
+        clientId = (String) params.remove(0);
+
+        if(!params.isEmpty() && !(params.get(0).equals("*"))) {
 
             while (!params.isEmpty() && params.get(0) instanceof String) {
                 if (params.get(0).equals("*")) {
@@ -32,11 +37,11 @@ public class Search implements Request {
                 authors.add((String) params.get(0));
                 params.remove(0);
             }
-        } else {
+        } else if (!params.isEmpty()) {
             params.remove(0);
         }
-        if(!params.isEmpty() && params.get(0) instanceof Integer){
-            isbn = Optional.of((Integer) params.get(0));
+        if(!params.isEmpty() && params.get(0) instanceof Long){
+            isbn = Optional.of((Long) params.get(0));
         } else if(!params.isEmpty()) {
             isbn = Optional.empty();
             params.remove(0);
@@ -97,17 +102,21 @@ public class Search implements Request {
             books.sort(new PublishDateComparator());
         }
 
-        //converts the book list to an object list for output
+        //converts the book list to an object list for output, and creates a list of ISBNs
+
+        List<Long> isbnSelection = new ArrayList<>();
 
         for(Book b : books){
             output.add(b);
+            isbnSelection.add(b.getIsbn());
         }
+
+        setUserSelection(isbnSelection);
 
         return output;
     }
 
-    public List<Book> bookList(List<Object> params){
-        return LBMS.br.searchBookStore(title,params);
-    }
+    public abstract List<Book> bookList(List<Object> params);
+    public abstract void setUserSelection(List<Long> books);
 
 }
