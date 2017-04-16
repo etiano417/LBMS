@@ -19,4 +19,8 @@ public class Problem {
     public String getMessage(){
         return message;
     }
+
+    public String toString(){
+        return getType();
+    }
 }
