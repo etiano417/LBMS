@@ -17,4 +17,7 @@ class MissingParameters {
         }
         return output;
     }
+    public static String missingParameters(List<String> requiredParams, int numParams, String clientId){
+        return clientId + "," + missingParameters(requiredParams,numParams);
+    }
 }
