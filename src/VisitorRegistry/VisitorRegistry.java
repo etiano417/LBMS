@@ -24,6 +24,20 @@ public class VisitorRegistry {
         return visitors;
     }
 
+    /**
+     * Checks to see if the visitor is in the registry
+     * @param id The ID of the visitor
+     * @return True if the visitor is in the registry
+     */
+    public boolean isInRegistry(String id) {
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * The visitor with the given ID begins a visit.  A visit object is created.
@@ -34,13 +48,7 @@ public class VisitorRegistry {
      */
     public String beginVisit(String id, LocalDateTime beginTime){
         //Check if the visitor is in the registry
-        boolean isInRegistry = false;
-        for (Visitor v : visitors) {
-            if (v.getVisitorID().equals(id)) {
-                isInRegistry = true;
-            }
-        }
-        if (!isInRegistry) {
+        if (!this.isInRegistry(id)) {
             return "invalid id";
         }
 
@@ -50,7 +58,6 @@ public class VisitorRegistry {
                 return "duplicate";
             }
         }
-
 
         LocalDate visitDate = beginTime.toLocalDate();
         LocalTime visitTime = beginTime.toLocalTime();
@@ -108,14 +115,11 @@ public class VisitorRegistry {
      */
     public String borrowBook(String id, Borrow borrow){
         //Check if the visitor is in the registry, if the book checkout limit has not been exceeded, and if the visitor has no outstanding fines
-        boolean isInRegistry = false;
         boolean bookLimitExceeded = false;
         boolean hasOutstandingFine = false;
 
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(id)) {
-                isInRegistry = true;
-
                 if (v.getBorrowing().size() >= 5) {
                     bookLimitExceeded = true;
                 }
@@ -124,13 +128,13 @@ public class VisitorRegistry {
                         hasOutstandingFine = true;
                     }
                 }
-                if (isInRegistry && !bookLimitExceeded && !hasOutstandingFine) {
+                if (!bookLimitExceeded && !hasOutstandingFine) {
                     v.removeBorrow(borrow);
                 }
             }
         }
 
-        if (!isInRegistry) { return "invalid id"; }
+        if (!isInRegistry(id)) { return "invalid id"; }
         if (bookLimitExceeded) { return "book limit exceeded"; }
         if (hasOutstandingFine) { return "has outstanding fine"; }
 
@@ -144,9 +148,7 @@ public class VisitorRegistry {
      * @param borrow The borrow transaction
      */
     public String returnBook(String id, Borrow borrow){
-        boolean isInRegistry = false;
         for (Visitor v : visitors) {
-            isInRegistry = true;
             if (v.getVisitorID().equals(id)) {
                 borrow.returnBook();
                 v.removeBorrow(borrow);
@@ -154,7 +156,7 @@ public class VisitorRegistry {
             }
         }
 
-        if(!isInRegistry) {
+        if(!isInRegistry(id)) {
             return "invalid id";
         }
 
@@ -167,13 +169,7 @@ public class VisitorRegistry {
      */
     public String payFine(String id, int amount) {
         //Check if the visitor is in the registry
-        boolean isInRegistry = false;
-        for (Visitor v : visitors) {
-            if (v.getVisitorID().equals(id)) {
-                isInRegistry = true;
-            }
-        }
-        if (!isInRegistry) {
+        if (!isInRegistry(id)) {
             return "invalid id";
         }
 
