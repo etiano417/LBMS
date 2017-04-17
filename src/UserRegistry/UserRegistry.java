@@ -132,5 +132,9 @@ public class UserRegistry {
         return false;
     }
 
+    public String getVisitor(String clientId){
+        return clients.get(clientId).getId();
+    }
+
 }
 

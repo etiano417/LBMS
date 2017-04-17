@@ -233,4 +233,15 @@ public class VisitorRegistry {
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
     }
+
+    public boolean isInRegistry(String id){
+        boolean inRegistry = false;
+        for(Visitor v : visitors){
+            if(v.getVisitorID().equals(id)){
+                inRegistry = true;
+            }
+        }
+
+        return inRegistry;
+    }
 }

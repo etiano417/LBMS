@@ -55,11 +55,15 @@ public class User {
     }
 
     public Long selectStoreBook(int selection){
-        return bookStoreOptions.get(selection);
+        if(selection - 1 < bookStoreOptions.size())
+            return bookStoreOptions.get(selection - 1);
+        return new Long(-1);
     }
 
     public Long selectLibraryBook(int selection){
-        return bookStoreOptions.get(selection);
+        if(selection < libraryBookOptions.size())
+            return libraryBookOptions.get(selection);
+        return new Long(-1);
     }
 
     public void setStoreSelection(List<Long> bookSelection){
