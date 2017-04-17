@@ -49,6 +49,7 @@ public class GUI_Practice extends Application{
         });
 
         primaryStage.show();
+        newConnection(pane);
     }
 
     public void newConnection(TabPane pane){

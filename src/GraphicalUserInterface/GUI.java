@@ -19,10 +19,6 @@ public class GUI extends Application{
         stage.setTitle("LBMS Client Window");
         TabPane pane = new TabPane();
 
-        Tab tab = new Tab(" + ");
-        tab.setClosable(false);
-        pane.getTabs().add(tab);
-
         Button button = new Button("New Connection");
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
@@ -30,8 +26,8 @@ public class GUI extends Application{
         //TabPane pane = new TabPane();
 
         Tab newtab = new Tab(" + ");
-        tab.setClosable(false);
-        tab.setContent(button);
+        newtab.setClosable(false);
+        newtab.setContent(button);
         pane.getTabs().add(newtab);
 
         Scene scene = new Scene(pane, 500, 300);
