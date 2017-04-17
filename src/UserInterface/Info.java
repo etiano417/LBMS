@@ -13,6 +13,7 @@ import java.util.Objects;
 public class Info implements UICommand {
 
     public String perform(List<String> params) {
+        String clientId = params.remove(0);
         List<Object> input = new ArrayList<>();
 
         if(params.size() < 1){
@@ -37,6 +38,8 @@ public class Info implements UICommand {
             }
         }
 
+        input.add(clientId);
+
         List<Object> results = new LibraryBookSearch(title,input).executeCommand();
 
         List<Book> books = new ArrayList<>();
@@ -49,7 +52,7 @@ public class Info implements UICommand {
 
         String output = String.format("info,%d",books.size());
         for(Book b : books){
-            output = output + String.format("\n%d,%s,%s;",b.getNumAvailable(),b.getIsbn(),b.toString());
+            output = output + String.format("\n%d,%s,%s",b.getNumAvailable(),b.getIsbn(),b.toString());
         }
         output = output + ";";
 
