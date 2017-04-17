@@ -24,9 +24,13 @@ public class BookRegistry
         for(Book b:books)
         {
             if(b.getTitle().toLowerCase().contains(name.toLowerCase())
-                    && b.getAuthors().containsAll((List<String>)params.get(0))
-                    && b.getISBN() == (Long)params.get(1))
-                toReturn.add(b);
+                    && b.getAuthors().containsAll((List<String>)params.get(0))) {
+                //&& (b.getISBN() == ((Optional<Long>)params.get(1)).get())
+                Optional<Long> isbn = (Optional<Long>) params.get(1);
+                if (!isbn.isPresent() || isbn.get() == b.getISBN()) {
+                    toReturn.add(b);
+                }
+            }
         }
         return toReturn;
     }

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import LBMS.LBMS;
+import Library.Library;
 
 /**
  * Records the time a visitor is beginning a visit.
@@ -30,6 +31,11 @@ public class BeginVisit implements Request{
         if(result.equals("invalid id")){
             output.add(new Problem("invalid-id","The specified visitor ID is not a valid ID or has not been assigned " +
                     "to any registered visitor."));
+            return output;
+        }
+
+        if(!LBMS.library.isOpen()){
+            output.add(new Problem("library-closed",""));
             return output;
         }
 
