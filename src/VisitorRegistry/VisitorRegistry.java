@@ -230,6 +230,7 @@ public class VisitorRegistry {
         return newVisitor.getVisitorID();
     }
 
+    /**
     public boolean isInRegistry(String id){
         boolean inRegistry = false;
         for(Visitor v : visitors){
@@ -240,4 +241,5 @@ public class VisitorRegistry {
 
         return inRegistry;
     }
+     */
 }
