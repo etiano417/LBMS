@@ -21,6 +21,8 @@ public class Datetime implements UICommand {
      * @return current date and time
      */
     public String perform(List<String> params){
+        //removes the client id
+        params.remove(0);
         Request cdat = new CurrentDateAndTime();
         LocalDateTime dt = (LocalDateTime) cdat.executeCommand().get(0);
         return String.format("datetime,%02d/%02d/%d,%02d:%02d:%02d;",dt.getDayOfMonth(),dt.getMonthValue(),dt.getYear(),

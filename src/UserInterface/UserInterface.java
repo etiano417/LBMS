@@ -6,6 +6,7 @@ import Request.CurrentDateAndTime;
 
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Responsible for providing a user interface
@@ -16,6 +17,7 @@ public class UserInterface {
     HashMap<String, UICommand> requests = new HashMap<>();
     String buffer = "";
     Scanner input = new Scanner(System.in);
+    String cid;
 
     /**
      * Displays a text-based commandline interface
@@ -25,12 +27,17 @@ public class UserInterface {
         greeting();
         timestamp();
         ClientConnect cc = new ClientConnect();
-        String cid = (String)cc.executeCommand().get(0);
+        cid = (String)cc.executeCommand().get(0);
         System.out.println(String.format("Client ID: %s",cid));
-        System.out.print(String.format("Client #%s: ",cid));
+        //System.out.print(String.format("Client #%s: ",cid));
         while(input.hasNext()){
-            System.out.print(String.format("Client #%s: ",cid));
+            //System.out.print(String.format("Client #%s: ",cid));
             submit(input.nextLine());
+            try {
+                TimeUnit.SECONDS.sleep(2);
+            } catch(Exception e){
+
+            }
         }
         exit();
     }
@@ -40,15 +47,21 @@ public class UserInterface {
      */
     private void setup(){
 
-        requests.put("datetime", new Datetime());
         requests.put("register", new Register());
+        requests.put("create", new Create());
+        requests.put("login", new Login());
+        requests.put("datetime", new Datetime());
+        requests.put("search", new Search());
+        requests.put("disconnect", new Disconnect());
+        requests.put("buy", new Buy());
+        requests.put("info", new Info());
         requests.put("arrive", new Arrive());
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());
-        requests.put("info", new Info());
-        requests.put("borrowed", new Borrowed());
-        requests.put("advance", new Advance());
-        requests.put("search", new Search());
+
+        //requests.put("borrowed", new Borrowed());
+        //requests.put("advance", new Advance());
+
     }
 
     /**
@@ -97,6 +110,7 @@ public class UserInterface {
         buffer = buffer + input;
         //shows the user the unparsed input remaining
         System.out.print(buffer);
+        //System.out.println("partial-request;");
     }
 
     /**
@@ -116,7 +130,12 @@ public class UserInterface {
         if(uic == null){
             System.out.println(command.get(0) + " is not a recognized command");
         } else {
-            System.out.println(uic.perform(command.subList(1, command.size())));
+            List<String> performParams = new ArrayList<>();
+            for(String s : command.subList(1, command.size())){
+                performParams.add(s);
+            }
+            performParams.add(0,cid);
+            System.out.println(uic.perform(performParams));
         }
 
         //empties the buffer

@@ -3,6 +3,7 @@ package UserInterface;
 import BookRegistry.Book;
 import Request.BookStoreSearch;
 import Request.LibraryBookSearch;
+import LBMS.LBMS;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,13 @@ import java.util.List;
 public class Search implements UICommand {
 
     public String perform(List<String> params) {
+
+        String clientId = params.remove(0);
+
+        if(!LBMS.ur.isEmployee(clientId)){
+            return EmployeeChecking.message(clientId,"search");
+        }
+
         List<Object> input = new ArrayList<>();
 
         if(params.size() < 1){
@@ -30,13 +38,14 @@ public class Search implements UICommand {
 
         for(String s : par){
             try{
-                int x = Integer.parseInt(s);
+                Long x = Long.parseLong(s);
                 input.add(x);
             } catch(NumberFormatException e){
                 input.add(s);
             }
         }
 
+        input.add(0,clientId);
         List<Object> results = new BookStoreSearch(title,input).executeCommand();
 
         List<Book> books = new ArrayList<>();
@@ -47,11 +56,10 @@ public class Search implements UICommand {
 
         UserInterface.librarySearch = books;
 
-        String output = String.format("info,%d",books.size());
+        String output = String.format("%s,info,%d",clientId,books.size());
         for(Book b : books){
             output = output + String.format("\n%d,%s,%s;",b.getNumAvailable(),b.getIsbn(),b.toString());
         }
-        output = output + ";";
 
         return output;
     }

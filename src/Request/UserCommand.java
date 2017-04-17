@@ -1,6 +1,10 @@
 package Request;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
+import static LBMS.LBMS.ur;
 
 /**
  * A class to protect commands from users that are not logged in
@@ -20,8 +24,10 @@ public class UserCommand implements Request {
      * @return
      */
     public List<Object> executeCommand() {
-        //if(){
-        //    return null;
-        return null;
+        if(ur.isUser(clientId)){
+            return request.executeCommand();
+        } else {
+            return new ArrayList<Object>();
+        }
     }
 }

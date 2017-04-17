@@ -9,8 +9,8 @@ import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResol
  */
 public class UserRegistry {
 
-    private static final String E1 = "duplicate-username";
-    private static final String E2 = "duplicate-id";
+    public static final String E1 = "duplicate-username";
+    public static final String E2 = "duplicate-id";
     //private static final String E3 = "invalid-id"; check this at request level
 
     //maps usernames to users
@@ -95,14 +95,7 @@ public class UserRegistry {
      */
     public boolean isEmployee(String id){
 
-        Iterator<User> iterate = users.values().iterator();
-        for(User u : users.values()){
-            if (u.getId().equals(id)){
-                return u.isEmployee();
-            }
-        }
-
-        return false;
+        return clients.get(id).isEmployee();
     }
 
     public String connect(){
@@ -114,5 +107,34 @@ public class UserRegistry {
     public boolean isConnected(String clientId){
         return clients.keySet().contains(clientId);
     }
+
+    public Long selectStoreBook(String clientId,int selection){
+        return clients.get(clientId).selectStoreBook(selection);
+    }
+
+    public Long selectLibraryBook(String clientId,int selection){
+        return clients.get(clientId).selectLibraryBook(selection);
+    }
+
+    public void setStoreSelection(String clientId, List<Long> books){
+        clients.get(clientId).setStoreSelection(books);
+    }
+
+    public void setLibrarySelection(String clientId, List<Long> books){
+        clients.get(clientId).setLibrarySelection(books);
+    }
+
+    public boolean logIn(String userId, String username, String password){
+        if(users.containsKey(username) && users.get(username).isPassword(password)){
+            clients.put(userId,users.get(username));
+            return true;
+        }
+        return false;
+    }
+
+    public String getVisitor(String clientId){
+        return clients.get(clientId).getId();
+    }
+
 }
 

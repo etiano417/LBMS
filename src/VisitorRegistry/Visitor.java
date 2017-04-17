@@ -17,6 +17,7 @@ public class Visitor {
     private String phoneNumber;
     private String visitorID;
     private ArrayList<Borrow> borrowing = new ArrayList<>();
+    private int amountOwed;
 
     private static long idTracker = 0;
 
@@ -40,36 +41,30 @@ public class Visitor {
     public void addBorrow(Borrow borrow) {
         borrowing.add(borrow);
     }
-
-    public void removeBorrow(Borrow borrow) {
+    void removeBorrow(Borrow borrow) {
         borrowing.remove(borrow);
     }
-
     public String getVisitorID() {
         return visitorID;
     }
-
-    public String getFirstName() {
+    String getFirstName() {
         return firstName;
     }
-
-    public String getLastName() {
+    String getLastName() {
         return lastName;
     }
-
-    public String getAddress() {
+    String getAddress() {
         return address;
     }
-
-    public String getPhone() {
+    String getPhone() {
         return phoneNumber;
     }
-
-    public ArrayList<Borrow> getBorrowing() {
+    ArrayList<Borrow> getBorrowing() {
         return borrowing;
     }
-
-    public String generateID(long id) {
+    void changeAmountOwed(int amount) { amountOwed += amount; }
+    int getAmountOwed() { return amountOwed; }
+    private String generateID(long id) {
         return String.format("%010d", id);
     }
 }

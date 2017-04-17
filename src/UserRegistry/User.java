@@ -1,14 +1,21 @@
 package UserRegistry;
 
+import BookRegistry.Book;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a single user account in the system
  */
 public class User {
 
-    private String username;
+    //private String username;
     private String password;
     private String id;
     private boolean employee;
+    private List<Long> bookStoreOptions;
+    private List<Long> libraryBookOptions;
 
     /**
      * Constructs a new user object
@@ -21,7 +28,8 @@ public class User {
         password = _password;
         id = _id;
         employee = _employee;
-
+        bookStoreOptions = new ArrayList<>();
+        libraryBookOptions = new ArrayList<>();
     }
 
     public User(){
@@ -44,5 +52,25 @@ public class User {
 
     public String toString(){
         return id;
+    }
+
+    public Long selectStoreBook(int selection){
+        if(selection - 1 < bookStoreOptions.size())
+            return bookStoreOptions.get(selection - 1);
+        return new Long(-1);
+    }
+
+    public Long selectLibraryBook(int selection){
+        if(selection < libraryBookOptions.size())
+            return libraryBookOptions.get(selection);
+        return new Long(-1);
+    }
+
+    public void setStoreSelection(List<Long> bookSelection){
+        bookStoreOptions = bookSelection;
+    }
+
+    public void setLibrarySelection(List<Long> bookSelection){
+        libraryBookOptions = bookSelection;
     }
 }

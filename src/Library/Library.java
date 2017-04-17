@@ -41,6 +41,10 @@ public class Library implements ClockObserver {
     	return;
     }
 
+    public boolean isOpen(){
+    	return open;
+	}
+
     /**
      * ends all visits currently in progress.
      */
