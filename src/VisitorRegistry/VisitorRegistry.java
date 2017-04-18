@@ -127,7 +127,6 @@ public class VisitorRegistry {
         }
 
         //Sort by departure time to find most recent visit.
-        //TODO: Needs testing
         tempVisits.sort(new Comparator<Visit>() {
             @Override
             public int compare(Visit v1, Visit v2) {
@@ -157,7 +156,6 @@ public class VisitorRegistry {
         //Check if the visitor is in the registry, if the book checkout limit has not been exceeded, and if the visitor has no outstanding fines
         boolean bookLimitExceeded = false;
         boolean hasOutstandingFine = false;
-        Visitor visitor = null;
 
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(id)) {
@@ -170,10 +168,8 @@ public class VisitorRegistry {
                     }
                 }
                 if (!bookLimitExceeded && !hasOutstandingFine) {
-                    v.removeBorrow(borrow);
+                    v.addBorrow(borrow);
                 }
-
-                visitor = v;
             }
         }
 
@@ -181,7 +177,6 @@ public class VisitorRegistry {
         if (bookLimitExceeded) { return "book limit exceeded"; }
         if (hasOutstandingFine) { return "has outstanding fine"; }
 
-        visitor.addBorrow(borrow);
         return "success";
     }
 
@@ -236,7 +231,6 @@ public class VisitorRegistry {
     public int getFine(String id){
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(id)) {
-
                 return v.getAmountOwed();
             }
         }

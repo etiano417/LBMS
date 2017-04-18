@@ -65,13 +65,29 @@ public class VisitorRegistryTest {
         assert vr.borrowBook(id4,b).equals("success");
         assert vr.borrowBook(id4,b).equals("book limit exceeded");
 
-        //how do I test owing money??
-
         //Test returning book
         assert vr.returnBook(id4,b).equals("success");
         assert vr.returnBook("notanid",b).equals("invalid id");
 
-        //test paying a fine?
+        //Test owes money by creating an a visitor and having them return an overdue book
+        boolean owesMoney = false;
+        String id5 = vr.RegisterVisitor("Matt","Damon", "1234", "1234");
+        Borrow b2 = new Borrow(new Book(123,"yes",authors,"yes", LocalDate.now(),100),LocalDate.now());
+        vr.borrowBook(id5, b2);
+        for (int i = 0; i < 10; i++) {
+            b2.advanceDay();
+        }
+        vr.returnBook(id5,b2);
+        for (Visitor v : vr.getVisitors()) {
+            if (v.getVisitorID().equals(id5) && v.getAmountOwed() > 0) {
+                owesMoney = true;
+            }
+        }
+        assert owesMoney;
 
+        //Test paying a fine
+        assert vr.payFine(id5, -5).equals("invalid-amount");
+        assert vr.payFine(id5, 500).equals("invalid-amount");
+        assert vr.payFine(id5, 10).equals("success");
     }
 }
