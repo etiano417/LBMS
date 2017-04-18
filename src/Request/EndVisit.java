@@ -35,4 +35,9 @@ public class EndVisit implements Request{
 
         return null;
     }
+
+    public List<Object> undoCommand(){
+        List<Object> output = new ArrayList<>();
+        return output;
+    }
 }

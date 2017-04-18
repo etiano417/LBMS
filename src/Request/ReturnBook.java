@@ -49,4 +49,9 @@ public class ReturnBook implements Request {
         return(output);
     }
 
+    public List<Object> undoCommand(){
+        List<Object> output = new ArrayList<>();
+        return output;
+    }
+
 }

@@ -116,6 +116,12 @@ public abstract class Search implements Request {
         return output;
     }
 
+    public List<Object> undoCommand(){
+        List<Object> output = new ArrayList<>();
+        output.add(new Problem("cannot-undo", "The most recently executed command cannot be undone."));
+        return output;
+    }
+
     public abstract List<Book> bookList(List<Object> params);
     public abstract void setUserSelection(List<Long> books);
 

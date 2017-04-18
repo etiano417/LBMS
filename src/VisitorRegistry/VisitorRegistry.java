@@ -67,6 +67,21 @@ public class VisitorRegistry {
     }
 
     /**
+     * Undoes begin visit by removing the visit from the visit collection
+     * @param id the id of the visitor
+     * @return success code
+     */
+    public String undoBeginVisit(String id) {
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                visits.remove(v);
+                return "success";
+            }
+        }
+        return "failed";
+    }
+
+    /**
      * Checks if the visitor is in the library
      * @param id - ID of the visitor
      * @return True if the visitor has any going visits

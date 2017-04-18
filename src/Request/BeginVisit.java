@@ -45,4 +45,14 @@ public class BeginVisit implements Request{
         output.add(dt.toLocalTime());
         return output;
     }
+
+    public List<Object> undoCommand() {
+        List<Object> output = new ArrayList<>();
+        String result = LBMS.vr.undoBeginVisit(visitorID);
+        if (result.equals("success")) {
+            output.add("success");
+        }
+        return output;
+    }
+
 }
