@@ -132,6 +132,10 @@ public class UserRegistry {
         return false;
     }
 
+    public void logOut(String userId){
+        clients.remove(userId);
+    }
+
     public String getVisitor(String clientId){
         return clients.get(clientId).getId();
     }
