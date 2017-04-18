@@ -36,7 +36,7 @@ public class LBMS {
 
         ur = new UserRegistry();
 
-        if(args.length > 0 && args[0].equals("ptui")) {
+        if(args.length > 0 && (args[0].equals("ptui")||args[0].equals("PTUI"))) {
             UserInterface UI = new UserInterface();
             UI.displayTextBasedUI();
         } else {

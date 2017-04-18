@@ -25,7 +25,7 @@ public class Pay implements UICommand{
             pf = new PayFine(clientId,amount);
         } else {
             String visitorId = params.get(1);
-            pf = new PayFine(clientId,amount,visitorId);
+            //pf = new PayFine(clientId,amount,visitorId);
         }
 
         List<Object> result = pf.executeCommand();
