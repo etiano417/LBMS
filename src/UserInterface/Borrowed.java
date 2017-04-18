@@ -36,9 +36,9 @@ public class Borrowed implements UICommand {
 
         for(int i = 0; i < results.size(); i++){
             Borrow b = (Borrow) results.get(i);
-            output = output + String.format("\n%d,%s,%s,d/%02d/%02d",i,b.getBook().getTitle(),
+            output = output + String.format("\n%d,%s,%s,%d-%02d-%02d",i + 1,b.getBook().getTitle(),
                     b.getBook().getIsbn(),b.getCheckedOut().getYear(),b.getCheckedOut().getMonthValue(),
-                    b.getCheckedOut().getDayOfYear());
+                    b.getCheckedOut().getDayOfMonth());
         }
 
         output = output + ";";
