@@ -31,7 +31,7 @@ public class GUI extends Application{
         newtab.setContent(button);
         pane.getTabs().add(newtab);
 
-        Scene scene = new Scene(pane, 500, 300);
+        Scene scene = new Scene(pane, 600, 400);
         stage.setScene(scene);
 
         button.setOnAction(new EventHandler<ActionEvent>() {
