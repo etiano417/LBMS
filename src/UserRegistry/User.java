@@ -1,10 +1,12 @@
 package UserRegistry;
 
 import BookRegistry.Book;
-import UserInterface.UICommand;
+//import UserInterface.UICommand;
+import Request.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Represents a single user account in the system
@@ -18,8 +20,8 @@ public class User {
     private List<Long> bookStoreOptions;
     private List<Long> libraryBookOptions;
 
-    //private Stack<UICommand> commandStack;
-    //private Stack<UICommand> undoneCommandStack;
+    private Stack<Request> commandStack;
+    private Stack<Request> undoneCommandStack;
 
     /**
      * Constructs a new user object
@@ -34,6 +36,9 @@ public class User {
         employee = _employee;
         bookStoreOptions = new ArrayList<>();
         libraryBookOptions = new ArrayList<>();
+
+        commandStack = new Stack<Request>();
+        undoneCommandStack = new Stack<Request>();
     }
 
     public User(){
@@ -78,5 +83,26 @@ public class User {
         libraryBookOptions = bookSelection;
     }
 
+    private void undo(){
+        Request request = commandStack.pop();
+        request.undoCommand();
+        undoneCommandStack.push(request);
+    }
+
+    private void redo(){
+        Request request = undoneCommandStack.pop();
+        request.executeCommand();
+        commandStack.push(request);
+    }
+
+    private void clearCommandStackS(){
+        commandStack.clear();
+        undoneCommandStack.clear();
+    }
+
+    private void pushToCommandStack(Request request){
+        commandStack.push(request);
+        undoneCommandStack.clear();
+    }
 
 }
