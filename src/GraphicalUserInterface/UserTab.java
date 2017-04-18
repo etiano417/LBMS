@@ -80,10 +80,13 @@ public class UserTab extends Tab{
     }
 
     private void submitCommand(){
-        commandText += "" + inputArea.getText();
+        commandText += "" + inputArea.getText().trim();
         commandText.replaceAll("\n", "");
+
         if (commandText.trim().length() > 0)
             pushToTerminal(inputArea.getText());
+        else
+            inputArea.setText("");
 
         while(commandText.contains(";")) {
             //UI.submitGUICommand(this, commandText.substring(1, commandText.indexOf(';')));
