@@ -17,7 +17,7 @@ public class Visitor {
     private String phoneNumber;
     private String visitorID;
     private ArrayList<Borrow> borrowing = new ArrayList<>();
-    private int amountOwed;
+    private int amountOwed = 0;
 
     private static long idTracker = 0;
 

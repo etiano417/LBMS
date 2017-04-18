@@ -1,6 +1,7 @@
 package UserRegistry;
 
 import BookRegistry.Book;
+import UserInterface.UICommand;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,9 @@ public class User {
     private boolean employee;
     private List<Long> bookStoreOptions;
     private List<Long> libraryBookOptions;
+
+    //private Stack<UICommand> commandStack;
+    //private Stack<UICommand> undoneCommandStack;
 
     /**
      * Constructs a new user object
@@ -73,4 +77,6 @@ public class User {
     public void setLibrarySelection(List<Long> bookSelection){
         libraryBookOptions = bookSelection;
     }
+
+
 }

@@ -22,7 +22,7 @@ public class UserTab extends Tab{
     private TextArea outputArea = new TextArea();
     private Button button = new Button("Enter");
     private Label inputLabel = new Label("Request: ");
-    private Label outputLabel = new Label("Terminal: ");
+    private Label outputLabel = new Label("Library Book Management System ");
     private Label clockLabel = new Label();
     private String commandText = "";
     private BorderPane borderPane;
