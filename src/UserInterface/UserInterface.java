@@ -56,11 +56,14 @@ public class UserInterface {
         requests.put("buy", new Buy());
         requests.put("info", new Info());
         requests.put("arrive", new Arrive());
+        requests.put("borrow", new Borrow());
+        requests.put("advance", new Advance());
+        requests.put("borrowed", new Borrowed());
+
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());
 
-        //requests.put("borrowed", new Borrowed());
-        //requests.put("advance", new Advance());
+        //
 
     }
 

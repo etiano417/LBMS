@@ -8,7 +8,8 @@ public class BookStoreTest
 {
     public static void main(String[] args)
     {
-        File file = new File("C:\\Users\\Shea-RF\\IdeaProjects\\BookRegistry\\src\\books.txt");
+
+        File file = new File("books.txt");
         BookStoreTextDatabase db = new BookStoreTextDatabase(file);
 
         ArrayList<String> a = new ArrayList<>();

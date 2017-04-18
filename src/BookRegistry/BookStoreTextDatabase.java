@@ -71,12 +71,20 @@ public class BookStoreTextDatabase implements BookStore
     public List<Book> search(String name, List<String> authors)
     {
         ArrayList<Book> toReturn = new ArrayList<>();
-        for(Book b:database)
-        {
-            if(b.getTitle().toLowerCase().contains(name.toLowerCase())
-                    && b.getAuthors().containsAll(authors))
-                toReturn.add(b);
+        if(name.equals("*")){
+            for (Book b : database) {
+                if (b.getAuthors().containsAll(authors))
+                    toReturn.add(b);
+            }
+
+        } else {
+            for (Book b : database) {
+                if (b.getTitle().toLowerCase().contains(name.toLowerCase())
+                        && b.getAuthors().containsAll(authors))
+                    toReturn.add(b);
+            }
         }
+
         return toReturn;
     }
 

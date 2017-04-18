@@ -24,7 +24,7 @@ public class Search implements UICommand {
         List<Object> input = new ArrayList<>();
 
         if(params.size() < 1){
-            return "info,missing-parameters,title;";
+            return String.format("%s,search,missing-parameters,title;",clientId);
         }
 
         ArrayList<String> par = new ArrayList<>();
@@ -56,7 +56,7 @@ public class Search implements UICommand {
 
         UserInterface.librarySearch = books;
 
-        String output = String.format("%s,info,%d",clientId,books.size());
+        String output = String.format("%s,search,%d",clientId,books.size());
         for(Book b : books){
             output = output + String.format("\n%d,%s,%s;",b.getNumAvailable(),b.getIsbn(),b.toString());
         }

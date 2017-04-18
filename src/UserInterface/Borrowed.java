@@ -1,7 +1,9 @@
 package UserInterface;
 
 import Request.FindBorrowedBooks;
+import Request.Problem;
 import Transaction.Borrow;
+import LBMS.LBMS;
 
 import java.util.List;
 
@@ -12,11 +14,25 @@ public class Borrowed implements UICommand {
 
     public String perform(List<String> params) {
 
-        List<Object> results = new FindBorrowedBooks(params.get(0)).executeCommand();
+        String clientId = params.remove(0);
+
+        String visitorId;
+
+        if(params.isEmpty()){
+            visitorId = LBMS.ur.getVisitor(clientId);
+        } else {
+            visitorId = params.get(0);
+        }
+
+        List<Object> results = new FindBorrowedBooks(visitorId).executeCommand();
 
         //List<Borrowed> borrows = new ArrayList<>();
 
-        String output = String.format("borrowed,%d",results.size());
+        if((!results.isEmpty())&& results.get(0) instanceof Problem){
+            return String.format("%s,borrowed,%s",clientId,results.get(0));
+        }
+
+        String output = String.format("%s,borrowed,%d",clientId,results.size());
 
         for(int i = 0; i < results.size(); i++){
             Borrow b = (Borrow) results.get(i);

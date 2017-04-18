@@ -85,4 +85,8 @@ public class Clock {
         return LocalDateTime.now().plusHours(hoursForward);
     }
 
+    public boolean isOpen(){
+        return (getTime().compareTo(getOpenTime()) > 0 && getTime().compareTo(getCloseTime()) < 0);
+    }
+
 }

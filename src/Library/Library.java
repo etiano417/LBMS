@@ -14,8 +14,8 @@ public class Library implements ClockObserver {
     private Clock clock;
     private VisitorRegistry registry;
     
-    public Library(Boolean open, Clock clock, VisitorRegistry registry){
-    	this.open = false;
+    public Library(Clock clock, VisitorRegistry registry){
+    	this.open = clock.isOpen();
     	this.clock = clock;
     	this.registry = registry;
     }

@@ -19,6 +19,11 @@ public class FindBorrowedBooks implements Request{
 
         List<Object> output = new ArrayList<>();
 
+        if(!LBMS.vr.isInRegistry(visitorID)){
+            output.add(new Problem("invalid-visitor-id",""));
+            return output;
+        }
+
         List<Borrow> borrows = LBMS.vr.findBorrowedBooks(visitorID);
 
         for(Borrow b : borrows){

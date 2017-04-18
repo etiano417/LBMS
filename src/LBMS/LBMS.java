@@ -30,7 +30,7 @@ public class LBMS {
 
         vr = new VisitorRegistry();
 
-        library = new Library(true,clock,vr);
+        library = new Library(clock,vr);
 
         br = new BookRegistry(new BookStoreTextDatabase(new File("books.txt")));
 
