@@ -22,10 +22,6 @@ public class GUI extends Application{
         stage.setTitle("LBMS Client Window");
         TabPane pane = new TabPane();
 
-        Button button = new Button("New Connection");
-        StackPane layout = new StackPane();
-        layout.getChildren().add(button);
-
         Tab newTab = new Tab();
         Label label = new Label("+");
         label.setOnMouseClicked(event -> newConnection(pane));
@@ -37,14 +33,6 @@ public class GUI extends Application{
 
         Scene scene = new Scene(pane, 600, 400);
         stage.setScene(scene);
-
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                newConnection(pane);
-            }
-        });
-
 
         stage.show();
         newConnection(pane);
