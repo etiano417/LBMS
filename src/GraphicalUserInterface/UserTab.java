@@ -62,12 +62,14 @@ public class UserTab extends Tab{
         outputArea.setWrapText(true);
 
         // Bottom
-        inputArea.setPrefSize(300, 15);
         HBox bottomBox = new HBox(inputLabel, inputArea, button);
+        HBox.setHgrow(inputArea, Priority.ALWAYS);
+        bottomBox.setAlignment(Pos.CENTER);
+        bottomBox.setPadding(new Insets(10));
+
         button.setOnAction(event -> submitCommand());
         inputArea.setOnAction(KeyCode -> submitCommand());
 
-        bottomBox.setPadding(new Insets(10));
         bottomBox.setSpacing(10);
         borderPane.setBottom(bottomBox);
         BorderPane.setAlignment(bottomBox, Pos.BOTTOM_CENTER);
