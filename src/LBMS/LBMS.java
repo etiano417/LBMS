@@ -1,7 +1,7 @@
 package LBMS;
 
 import UserInterface.UserInterface;
-import GraphicalUserInterface.GUI_Practice;
+import GraphicalUserInterface.GUI;
 import Clock.Clock;
 import Clock.ClockObserver;
 import VisitorRegistry.VisitorRegistry;
@@ -41,7 +41,7 @@ public class LBMS {
             UI.displayTextBasedUI();
         } else {
             String[] params = {};
-            GUI_Practice.main(params);
+            GUI.main(params);
         }
 
     }

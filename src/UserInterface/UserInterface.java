@@ -8,6 +8,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
+import GraphicalUserInterface.*;
+
 /**
  * Responsible for providing a user interface
  */
@@ -45,7 +47,7 @@ public class UserInterface {
     /**
      * attaches all the UI commands to the strings that invoke them in the requests HashMap.
      */
-    private void setup(){
+    public void setup(){
 
         requests.put("register", new Register());
         requests.put("create", new Create());
@@ -96,7 +98,7 @@ public class UserInterface {
      *
      * @param input the user input
      */
-    private void submit(String input){
+    public void submit(String input){
 
         //This is repeated as long as there are any ';' symbols remaining in the input string
         while(input.indexOf(';') > -1) {
@@ -114,6 +116,27 @@ public class UserInterface {
         //shows the user the unparsed input remaining
         System.out.print(buffer);
         //System.out.println("partial-request;");
+    }
+
+    public void submitGUICommand(UserTab userTab, String commandText){
+        //converts the string to a list of strings (delimited with ',' characters)
+        List<String> command = Arrays.asList(commandText.split(","));
+        //retrieves the UICommand that cooresponds the input command (from the requests HashMap)
+        UICommand uic = requests.get(command.get(0));
+        //Check to see if there was a cooresponding UICommand. If there was not, the user is informed that the command
+        //is not recognized. If there was a cooresponding UICommand, the input parameters are passed as a list to the
+        //UICommand
+        if(uic == null){
+            userTab.pushToTerminal(command.get(0) + " is not a recognized command");
+        } else {
+            List<String> performParams = new ArrayList<>();
+            for(String s : command.subList(1, command.size())){
+                performParams.add(s);
+            }
+            performParams.add(0,cid);
+            userTab.pushToTerminal(uic.perform(performParams));
+        }
+        //userTab.pushToTerminal();
     }
 
     /**
@@ -143,5 +166,13 @@ public class UserInterface {
 
         //empties the buffer
         buffer = "";
+    }
+
+    public String getClientId(){
+        return cid;
+    }
+
+    public void connect(){
+        cid = (String) new ClientConnect().executeCommand().get(0);
     }
 }

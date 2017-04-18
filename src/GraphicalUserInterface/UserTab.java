@@ -1,5 +1,6 @@
 //import javafx.*;
 package GraphicalUserInterface;
+import UserInterface.*;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -7,24 +8,15 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.geometry.Insets;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-
 import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
-
-import javafx.scene.input.KeyEvent;
 
 
 public class UserTab extends Tab{
-
-    private TextField input;
-    private TextArea output;
 
     private String clientid;
     private TextField inputArea = new TextField();
@@ -33,54 +25,25 @@ public class UserTab extends Tab{
     private Label inputLabel = new Label("Request: ");
     private Label outputLabel = new Label("Terminal: ");
     private Label clockLabel = new Label();
-    private String buildText = "";
+    private String commandText = "";
     private BorderPane borderPane;
+    private UserInterface UI;
 
-    public UserTab(){
-        super();
-        instantiate(new BorderPane());
-    }
+    public UserTab(String id){
+        super("Client "+ id);
 
-    public UserTab(String s){
-        super(s);
+        UI = new UserInterface();
+        UI.connect();
         inputArea.setEditable(true);
         outputArea.setEditable(false);
-        pushToTerminal("Hello, world!");
+        pushToTerminal("Client: " + UI.getClientId());
 
         borderPane = new BorderPane();
         setBorderPane(borderPane);
         setContent(borderPane);
-    }
 
-    public void instantiate(BorderPane borderPane){
-        input = new TextField();
-        output = new TextArea("TEXT");
-        input.setVisible(true);
-        input.setEditable(true);
-        output.setVisible(true);
-        output.setEditable(false);
 
-        //Shared
-        borderPane.setPadding(new Insets(10));
-
-        //Top
-        Region region = new Region();
-        region.setPrefSize(500, 300);
-        HBox.setHgrow(region, Priority.ALWAYS);
-        HBox topBox = new HBox(region);
-        borderPane.setTop(topBox);
-
-        //Center
-        borderPane.setCenter(output);
-
-        Label inputLabel = new Label("input");
-
-        //Bottom
-        HBox box = new HBox(inputLabel, input);
-        box.setPadding(new Insets(10));
-        box.setSpacing(10);
-        borderPane.setBottom(box);
-        BorderPane.setAlignment(box, Pos.BOTTOM_CENTER);
+        UI.setup();
     }
 
     private void setBorderPane(BorderPane borderPane) {
@@ -112,14 +75,27 @@ public class UserTab extends Tab{
         borderPane.setStyle("-fx-padding: 10;");
     }
 
-    private void pushToTerminal(String text){
+    public void pushToTerminal(String text){
         outputArea.appendText(text + "\n");
     }
 
     private void submitCommand(){
-        String commandText = inputArea.getText();
+        commandText += "" + inputArea.getText();
+        commandText.replaceAll("\n", "");
         if (commandText.trim().length() > 0)
-            pushToTerminal(commandText);
+            pushToTerminal(inputArea.getText());
+
+        while(commandText.contains(";")) {
+            //UI.submitGUICommand(this, commandText.substring(1, commandText.indexOf(';')));
+            //pushToTerminal("Command: " + commandText.substring(0, commandText.indexOf(';')+1));
+            UI.submitGUICommand(this, commandText.substring(0, commandText.indexOf(';')));
+            if(commandText.length() == commandText.indexOf(";"))
+                commandText="";
+            else
+                commandText = commandText.substring(commandText.indexOf(';')+1).trim();
+        }
+
+        //pushToTerminal();
         inputArea.setText("");
     }
 }

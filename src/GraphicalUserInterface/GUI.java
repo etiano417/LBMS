@@ -10,6 +10,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class GUI extends Application{
+
+    int clients = 0;
+
     public static void main(String[] args){
         launch(args);
     }
@@ -47,7 +50,8 @@ public class GUI extends Application{
     }
 
     public void newConnection(TabPane pane){
-        Tab newTab = new UserTab("New");
+        clients+=1;
+        Tab newTab = new UserTab(""+clients);
         pane.getTabs().add(pane.getTabs().size()-1, newTab);
     }
 }
