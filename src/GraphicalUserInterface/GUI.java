@@ -26,8 +26,6 @@ public class GUI extends Application{
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
 
-        //TabPane pane = new TabPane();
-
         Tab newtab = new Tab(" + ");
         newtab.setClosable(false);
         newtab.setContent(button);

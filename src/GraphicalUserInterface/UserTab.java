@@ -18,7 +18,6 @@ import javafx.scene.control.Button;
 
 public class UserTab extends Tab{
 
-    private String clientid;
     private TextField inputArea = new TextField();
     private TextArea outputArea = new TextArea();
     private Button button = new Button("Enter");
@@ -53,7 +52,7 @@ public class UserTab extends Tab{
         Region region2 = new Region();
         HBox.setHgrow(region1, Priority.ALWAYS);
         HBox.setHgrow(region2, Priority.ALWAYS);
-        HBox topBox = new HBox(region1, region2, clockLabel);
+        HBox topBox = new HBox(outputLabel, region1, region2, clockLabel);
         borderPane.setTop(topBox);
         BorderPane.setAlignment(topBox, Pos.TOP_CENTER);
 
