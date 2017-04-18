@@ -83,23 +83,27 @@ public class User {
         libraryBookOptions = bookSelection;
     }
 
+    //undo the most recent undone command
     private void undo(){
         Request request = commandStack.pop();
         request.undoCommand();
         undoneCommandStack.push(request);
     }
 
+    //redo the most recent undone command
     private void redo(){
         Request request = undoneCommandStack.pop();
         request.executeCommand();
         commandStack.push(request);
     }
 
+    //Called after each command that is not undoable
     private void clearCommandStackS(){
         commandStack.clear();
         undoneCommandStack.clear();
     }
 
+    //Called after each undoable command
     private void pushToCommandStack(Request request){
         commandStack.push(request);
         undoneCommandStack.clear();
