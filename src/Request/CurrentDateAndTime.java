@@ -18,4 +18,10 @@ public class CurrentDateAndTime implements Request {
         output.add(0,LBMS.clock.getDateTime());
         return output;
     }
+
+    public List<Object> undoCommand(){
+        List<Object> output = new ArrayList<>();
+        output.add(new Problem("cannot-undo", "The most recently executed command cannot be undone."));
+        return output;
+    }
 }

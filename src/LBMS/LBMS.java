@@ -43,6 +43,5 @@ public class LBMS {
             String[] params = {};
             GUI_Practice.main(params);
         }
-
     }
 }

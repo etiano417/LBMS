@@ -2,6 +2,7 @@ package Request;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import LBMS.LBMS;
 import Library.Library;
@@ -43,6 +44,19 @@ public class BeginVisit implements Request{
         output.add(visitorID);
         output.add(dt.toLocalDate());
         output.add(dt.toLocalTime());
+        return output;
+    }
+
+    /**
+     * Undoes the beginVisit command
+     * @return A list of output strings
+     */
+    public List<Object> undoCommand() {
+        List<Object> output = new ArrayList<>();
+        String result = LBMS.vr.undoBeginVisit(visitorID);
+        if (result.equals("success")) {
+            output.add("success");
+        }
         return output;
     }
 }

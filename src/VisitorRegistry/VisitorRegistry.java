@@ -38,10 +38,26 @@ public class VisitorRegistry {
         return false;
     }
 
+    /**
+     * Checks if the visitor is in the library.  Private because it is only used in the VisitorRegistry
+     * @param id - ID of the visitor
+     * @return True if the visitor has any going visits
+     */
+    private boolean isVisiting(String id) {
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 
     /**
      * The visitor with the given ID begins a visit.  A visit object is created.
-     * The visit is given the visitor ID, the date, and the starting time.
+     * The visit is given the visitor ID, the date, and the starting time.  The
+     * visit object is added to the collection of visits
      * @param id - The ID of the visitor in the collection
      * @param beginTime - The time of the visitor's arrival
      * @return return a String which indicates if the operation was successful
@@ -53,11 +69,8 @@ public class VisitorRegistry {
         }
 
         //Make sure visitor isn't already performing a visit
-        for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                return "duplicate";
-            }
-        }
+        if (isVisiting(id))
+            return "duplicate";
 
         LocalDate visitDate = beginTime.toLocalDate();
         LocalTime visitTime = beginTime.toLocalTime();
@@ -66,18 +79,14 @@ public class VisitorRegistry {
         return "success";
     }
 
-    /**
-     * Checks if the visitor is in the library
-     * @param id - ID of the visitor
-     * @return True if the visitor has any going visits
-     */
-    public boolean getVisiting(String id) {
+    public String undoBeginVisit(String id) {
         for (Visit v : visits) {
             if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                return true;
+                visits.remove(v);
+                return "success";
             }
         }
-        return false;
+        return "failed";
     }
 
     /**
@@ -88,22 +97,15 @@ public class VisitorRegistry {
      */
     public String endVisit(String id, LocalTime time){
         //Check if the visitor is already visiting
-        boolean isVisiting = false;
-        for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                isVisiting = true;
-            }
-        }
-        if (!isVisiting) {
+        if (!isVisiting(id)) {
             return "invalid id";
         }
 
         for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+            if (v.getVisitorID().equals(id)) {
                 v.setDepartureTime(time);
             }
         }
-
         return "success";
     }
 
@@ -229,17 +231,4 @@ public class VisitorRegistry {
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
     }
-
-    /**
-    public boolean isInRegistry(String id){
-        boolean inRegistry = false;
-        for(Visitor v : visitors){
-            if(v.getVisitorID().equals(id)){
-                inRegistry = true;
-            }
-        }
-
-        return inRegistry;
-    }
-     */
 }
