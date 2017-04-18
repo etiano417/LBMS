@@ -23,4 +23,10 @@ public class AdvanceTime implements Request {
         return new ArrayList<Object>();
     }
 
+    public List<Object> undoCommand(){
+        List<Object> output = new ArrayList<>();
+        output.add(new Problem("cannot-undo", "The most recently executed command cannot be undone."));
+        return output;
+    }
+
 }

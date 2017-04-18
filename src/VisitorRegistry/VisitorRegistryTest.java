@@ -27,15 +27,29 @@ public class VisitorRegistryTest {
         assert vr.beginVisit("notanid", LocalDateTime.now()).equals("invalid id");
         assert vr.beginVisit(id, LocalDateTime.now()).equals("duplicate");
 
-        //test getVisiting()
+        //Test undo visitor arrival
+        vr.beginVisit(id, LocalDateTime.now());
+        assert vr.undoBeginVisit(id).equals("success");
+
+        //test isVisiting()
         String id2 = vr.RegisterVisitor("Some","Guy","4444","5555");
-        assert vr.getVisiting(id2);
-        assert !vr.getVisiting("notanid");
+        vr.beginVisit(id2, LocalDateTime.now());
+        assert vr.isVisiting(id2);
+        assert !vr.isVisiting("notanid");
 
         //test ending visits
         String id3 = vr.RegisterVisitor("Yngwie","Malmsteen","4444","5555");
+        vr.beginVisit(id3, LocalDateTime.now());
         assert vr.endVisit(id3,LocalTime.now()).equals("success");
         assert vr.endVisit("notanid",LocalTime.now()).equals("invalid id");
+
+        //Test undoing an end visit by creating a few visits and making sure the most recent one is undone
+        vr.beginVisit(id3, LocalDateTime.now().minusDays(5));
+        vr.endVisit(id3, LocalTime.now());
+
+        vr.beginVisit(id3, LocalDateTime.now());
+        vr.endVisit(id3, LocalTime.now().plusHours(2));
+        assert vr.undoEndVisit(id3).equals("success");
 
         //Test borrowing books
         List<String> authors = new ArrayList<>();
@@ -58,5 +72,6 @@ public class VisitorRegistryTest {
         assert vr.returnBook("notanid",b).equals("invalid id");
 
         //test paying a fine?
+
     }
 }

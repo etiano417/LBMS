@@ -26,20 +26,21 @@ public class GUI extends Application{
         StackPane layout = new StackPane();
         layout.getChildren().add(button);
 
-        //TabPane pane = new TabPane();
+        Tab newTab = new Tab();
+        Label label = new Label("+");
+        label.setOnMouseClicked(event -> newConnection(pane));
+        newTab.setGraphic(label);
+        newTab.setClosable(false);
+        pane.getTabs().add(newTab);
+        newTab.setDisable(true);
+        newTab.setStyle("-fx-opacity: 1;");
 
-        Tab newtab = new Tab(" + ");
-        newtab.setClosable(false);
-        newtab.setContent(button);
-        pane.getTabs().add(newtab);
-
-        Scene scene = new Scene(pane, 500, 300);
+        Scene scene = new Scene(pane, 600, 400);
         stage.setScene(scene);
 
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                //System.out.println("Hello World!");
                 newConnection(pane);
             }
         });
@@ -53,5 +54,6 @@ public class GUI extends Application{
         clients+=1;
         Tab newTab = new UserTab(""+clients);
         pane.getTabs().add(pane.getTabs().size()-1, newTab);
+        pane.getSelectionModel().select(newTab);
     }
 }
