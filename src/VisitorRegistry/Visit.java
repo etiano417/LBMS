@@ -23,6 +23,13 @@ public class Visit {
         ongoing = false;
     }
 
+    public void undoSetDepartureTime() {
+        timeOfDeparture = null;
+        ongoing = true;
+    }
+
+    public LocalTime getDepartureTime() { return timeOfDeparture; }
+
     public String getVisitorID() {
         return visitorID;
     }
@@ -34,4 +41,7 @@ public class Visit {
     public boolean isOngoing() {
         return ongoing;
     }
+
+    //Just for testing purposes
+    public LocalDate getDateOfVisit() { return dateOfVisit; }
 }

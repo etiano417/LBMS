@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 
 /**
  * Responsible for keeping track of the Library's visitors and visits.
@@ -38,6 +39,20 @@ public class VisitorRegistry {
         return false;
     }
 
+    /**
+     * Checks if the visitor is in the library
+     * @param id - ID of the visitor
+     * @return True if the visitor has any going visits
+     */
+    public boolean isVisiting(String id) {
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * The visitor with the given ID begins a visit.  A visit object is created.
@@ -48,15 +63,13 @@ public class VisitorRegistry {
      */
     public String beginVisit(String id, LocalDateTime beginTime){
         //Check if the visitor is in the registry
-        if (!this.isInRegistry(id)) {
+        if (!isInRegistry(id)) {
             return "invalid id";
         }
 
         //Make sure visitor isn't already performing a visit
-        for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                return "duplicate";
-            }
+        if (isVisiting(id)) {
+            return "duplicate";
         }
 
         LocalDate visitDate = beginTime.toLocalDate();
@@ -81,19 +94,7 @@ public class VisitorRegistry {
         return "failed";
     }
 
-    /**
-     * Checks if the visitor is in the library
-     * @param id - ID of the visitor
-     * @return True if the visitor has any going visits
-     */
-    public boolean getVisiting(String id) {
-        for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     /**
      * The visitor's visit ends.  The visitor's ongoing visit is given a
@@ -103,13 +104,7 @@ public class VisitorRegistry {
      */
     public String endVisit(String id, LocalTime time){
         //Check if the visitor is already visiting
-        boolean isVisiting = false;
-        for (Visit v : visits) {
-            if (v.getVisitorID().equals(id) && v.isOngoing()) {
-                isVisiting = true;
-            }
-        }
-        if (!isVisiting) {
+        if (!isVisiting(id)) {
             return "invalid id";
         }
 
@@ -120,6 +115,36 @@ public class VisitorRegistry {
         }
 
         return "success";
+    }
+
+    public String undoEndVisit(String id) {
+        //Find all completed visits associated with visitor
+        ArrayList<Visit> tempVisits = new ArrayList<Visit>();
+        for (Visit v : visits) {
+            if (!v.isOngoing() && v.getVisitorID().equals(id)) {
+                tempVisits.add(v);
+            }
+        }
+
+        //Sort by departure time to find most recent visit.
+        //TODO: Needs testing
+        tempVisits.sort(new Comparator<Visit>() {
+            @Override
+            public int compare(Visit v1, Visit v2) {
+                if (v2.getDateOfVisit().compareTo(v1.getDateOfVisit()) == 0) {
+                    return v2.getDepartureTime().compareTo(v1.getDepartureTime());
+                }
+                return v2.getDateOfVisit().compareTo(v1.getDateOfVisit());
+            }
+        });
+
+        //Time of departure becomes null and ongoing is set to true
+        tempVisits.get(0).undoSetDepartureTime();
+        if (tempVisits.get(0).isOngoing() && tempVisits.get(0).getDepartureTime() == null) {
+            return "success";
+        }
+        return "failure";
+
     }
 
     /**
@@ -244,17 +269,4 @@ public class VisitorRegistry {
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
     }
-
-    /**
-    public boolean isInRegistry(String id){
-        boolean inRegistry = false;
-        for(Visitor v : visitors){
-            if(v.getVisitorID().equals(id)){
-                inRegistry = true;
-            }
-        }
-
-        return inRegistry;
-    }
-     */
 }
