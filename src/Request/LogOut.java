@@ -16,7 +16,7 @@ import LBMS.LBMS;
     }
 
     public List<Object> executeCommand(){
-        //LBMS.ur.logOut(clientId);
+        LBMS.ur.logOut(clientId);
         return new ArrayList<>();
     }
 
