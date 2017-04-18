@@ -13,27 +13,36 @@ import LBMS.LBMS;
 public class EndVisit implements Request{
     String visitorID;
 
-    public EndVisit(String _visitorID){
+    public EndVisit(String _clientId, String _visitorID){
         visitorID = _visitorID;
+    }
+
+    public EndVisit(String _clientId){
+        visitorID = LBMS.ur.getVisitor(_clientId);
     }
 
     public List<Object> executeCommand(){
 
+        List<Object> output = new ArrayList<>();
+
+        if(!LBMS.vr.isVisiting(visitorID)){
+            output.add(new Problem("invalid-id",""));
+            return output;
+        }
+
         LocalDateTime endTime = LBMS.clock.getDateTime();
+
+        LocalTime startTime = LBMS.vr.getVisiting(visitorID);
 
         LBMS.vr.endVisit(visitorID, endTime.toLocalTime());
 
-        //LocalTime startTime = LBMS.vr.getVisiting(visitorID);
-
-        //Duration length = Duration.between(startTime,endTime);
-
-        List<Object> output = new ArrayList<>();
+        Duration length = Duration.between(startTime,endTime);
 
         output.add(visitorID);
-        output.add(endTime);
-        //output.add(length);
+        output.add(endTime.toLocalTime());
+        output.add(length);
 
-        return null;
+        return output;
     }
 
     public List<Object> undoCommand(){

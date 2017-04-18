@@ -53,6 +53,14 @@ public class VisitorRegistry {
         return false;
     }
 
+    public LocalTime getVisiting(String id){
+        for (Visit v : visits) {
+            if (v.getVisitorID().equals(id) && v.isOngoing()) {
+                return v.getTimeOfArrival();
+            }
+        }
+        return null;
+    }
 
     /**
      * The visitor with the given ID begins a visit.  A visit object is created.
