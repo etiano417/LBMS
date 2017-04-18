@@ -65,7 +65,7 @@ public class UserTab extends Tab{
         inputArea.setPrefSize(300, 15);
         HBox bottomBox = new HBox(inputLabel, inputArea, button);
         button.setOnAction(event -> submitCommand());
-        //inputArea.getOnKeyPressed(KeyCode.ENTER submitCommand(););
+        inputArea.setOnAction(KeyCode -> submitCommand());
 
         bottomBox.setPadding(new Insets(10));
         bottomBox.setSpacing(10);
