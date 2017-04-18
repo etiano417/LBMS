@@ -43,7 +43,7 @@ public class UserTab extends Tab{
         setContent(borderPane);
 
 
-        UI.setup();
+        UI.setupMultiConnect();
     }
 
     private void setBorderPane(BorderPane borderPane) {

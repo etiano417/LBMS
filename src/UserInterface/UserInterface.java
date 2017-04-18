@@ -47,7 +47,7 @@ public class UserInterface {
     /**
      * attaches all the UI commands to the strings that invoke them in the requests HashMap.
      */
-    public void setup(){
+    private void setup(){
 
         requests.put("register", new Register());
         requests.put("create", new Create());
@@ -67,6 +67,12 @@ public class UserInterface {
 
         //
 
+    }
+
+    public void setupMultiConnect(){
+
+        setup();
+        requests.remove("disconnect");
     }
 
     /**
