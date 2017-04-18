@@ -25,6 +25,15 @@ public class VisitorRegistry {
         return visitors;
     }
 
+    public Visitor getVisitor(String id) {
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(id)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
     /**
      * Checks to see if the visitor is in the registry
      * @param id The ID of the visitor

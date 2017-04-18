@@ -41,7 +41,7 @@ public class Visitor {
     public void addBorrow(Borrow borrow) {
         borrowing.add(borrow);
     }
-    void removeBorrow(Borrow borrow) {
+    public void removeBorrow(Borrow borrow) {
         borrowing.remove(borrow);
     }
     public String getVisitorID() {
