@@ -87,6 +87,7 @@ public class BorrowBook implements Request {
                 }
             }
         }
+        output.add("success");
         return output;
     }
 }

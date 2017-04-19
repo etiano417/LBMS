@@ -227,7 +227,7 @@ public class VisitorRegistry {
         }
 
         if(!isInRegistry(id)) {
-            return "invalid-visitor-id";
+            return "invalid id";
         }
 
         return "success";
@@ -241,13 +241,28 @@ public class VisitorRegistry {
                 if(b == null){
                     return "invalid-book-id";
                 }
-
                 return returnBook(id,b);
             }
         }
 
         assert(false); //this point should never be reached
         return null;
+    }
+
+    /**
+     * Undoes a book return
+     * @param id The visitor's id
+     * @return success if the function completes
+     */
+    public String undoReturnBook(String id) {
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(id)) {
+                Borrow lastReturn = v.getPreviousBookReturn();
+                v.addBorrow(lastReturn);
+                v.changeAmountOwed(lastReturn.getFee() * -1);
+            }
+        }
+        return "success";
     }
 
     /**
