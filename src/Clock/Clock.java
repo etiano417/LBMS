@@ -61,6 +61,7 @@ public class Clock implements Serializable
      */
     public void moveForward(int hours){
         hoursForward += hours;
+        forceUpdate();
     }
 
     /**
@@ -89,6 +90,12 @@ public class Clock implements Serializable
 
     public boolean isOpen(){
         return (getTime().compareTo(getOpenTime()) > 0 && getTime().compareTo(getCloseTime()) < 0);
+    }
+
+    public void forceUpdate(){
+        for(ClockObserver co : observers){
+            co.update();
+        }
     }
 
 }
