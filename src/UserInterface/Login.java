@@ -26,7 +26,7 @@ public class Login implements UICommand{
             return MissingParameters.missingParameters(requiredParameters,params.size());
         }
         List<Object> result = new LogIn(clientId,params.get(0),params.get(1)).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.ur.getUser(clientId).clearCommandStack();
         if(!result.isEmpty() && result.get(0) instanceof Problem){
             return String.format("%s,login,%s;",clientId,result.get(0));
         }

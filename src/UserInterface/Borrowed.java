@@ -25,7 +25,7 @@ public class Borrowed implements UICommand {
         }
 
         List<Object> results = new FindBorrowedBooks(clientId,visitorId).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.ur.getUser(clientId).clearCommandStack();
 
         //List<Borrowed> borrows = new ArrayList<>();
 
@@ -43,6 +43,8 @@ public class Borrowed implements UICommand {
         }
 
         output = output + ";";
+
+        LBMS.ur.clearDone(clientId);
 
         return output;
     }

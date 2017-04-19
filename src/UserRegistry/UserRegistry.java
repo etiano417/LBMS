@@ -1,6 +1,7 @@
 package UserRegistry;
 
 import java.util.*;
+import Request.Request;
 
 /**
  * Responsible for dispensing User objects when offered the proper username and password. Stores all system users.
@@ -153,6 +154,22 @@ public class UserRegistry {
 
     public String getVisitor(String clientId){
         return clients.get(clientId).getId();
+    }
+
+    public void pushToDone(String clientId, Request req){
+        clients.get(clientId).pushToCommandStack(req);
+    }
+
+    public void clearDone(String clientId){
+        clients.get(clientId).clearCommandStack();
+    }
+
+    public boolean undo(String clientId){
+        return clients.get(clientId).undo();
+    }
+
+    public boolean redo(String clientId){
+        return clients.get(clientId).redo();
     }
 
     public Map<String,User> getUserList()

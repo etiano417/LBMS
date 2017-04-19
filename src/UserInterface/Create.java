@@ -36,7 +36,7 @@ public class Create implements UICommand {
         String visitorId = params.get(3);
         CreateNewAccount cna = new CreateNewAccount(username,password,employee,visitorId);
         List<Object> result = cna.executeCommand();
-        LBMS.LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.LBMS.ur.getUser(clientId).clearCommandStack();
         if(!(result.isEmpty()) && result.get(0) instanceof Problem){
             return clientId + ",create," + ((Problem) result.get(0)).getType()+";";
         }

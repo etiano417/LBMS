@@ -341,6 +341,10 @@ public class VisitorRegistry {
         return newVisitor.getVisitorID();
     }
 
+    public int numberOfVisitors(){
+        return visitors.size();
+    }
+
     public double overdueFee(String visitorId, Long isbn){
         for (Visitor v : visitors) {
             if (v.getVisitorID().equals(visitorId)) {

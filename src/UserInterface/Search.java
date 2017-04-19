@@ -47,7 +47,7 @@ public class Search implements UICommand {
 
         input.add(0,clientId);
         List<Object> results = new BookStoreSearch(title,input).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.ur.getUser(clientId).clearCommandStack();
 
         List<Book> books = new ArrayList<>();
 
@@ -62,6 +62,7 @@ public class Search implements UICommand {
             output = output + String.format("\n%d,%s,%s;",b.getNumAvailable(),b.getIsbn(),b.toString());
         }
 
+        LBMS.ur.clearDone(clientId);
         return output;
     }
 }
