@@ -9,6 +9,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 import GraphicalUserInterface.*;
+import Request.SafeStartUp;
 
 /**
  * Responsible for providing a user interface
@@ -67,6 +68,7 @@ public class UserInterface {
         requests.put("return", new Return());
         requests.put("undo", new UndoCommand());
         requests.put("redo", new RedoCommand());
+        //requests.put("shutdown", new ShutDown());
 
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());
