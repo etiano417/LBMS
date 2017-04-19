@@ -85,23 +85,27 @@ public class User implements Serializable
     }
 
     public void undo(){
-        Request request = commandStack.pop();
-        request.undoCommand();
-        undoneCommandStack.push(request);
+        if (commandStack.size() > 0) {
+            Request request = commandStack.pop();
+            request.undoCommand();
+            undoneCommandStack.push(request);
+        }
     }
 
     public void redo(){
-        Request request = undoneCommandStack.pop();
-        request.executeCommand();
-        commandStack.push(request);
+        if (undoneCommandStack.size() > 0) {
+            Request request = undoneCommandStack.pop();
+            request.executeCommand();
+            commandStack.push(request);
+        }
     }
 
-    private void clearCommandStackS(){
+    public void clearCommandStack(){
         commandStack.clear();
         undoneCommandStack.clear();
     }
 
-    private void pushToCommandStack(Request request){
+    public void pushToCommandStack(Request request){
         commandStack.push(request);
         undoneCommandStack.clear();
     }

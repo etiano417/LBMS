@@ -32,6 +32,7 @@ public class Register implements UICommand {
         }
 
         List<Object> output = new RegisterVisitor(params.get(0), params.get(1), params.get(2), params.get(3)).executeCommand();
+        LBMS.ur.getUser(clientId).clearCommandStack();
         //String visitorID = LBMS.vr.RegisterVisitor(params.get(0), params.get(1), params.get(2), params.get(3));
         if(output.get(0) instanceof Problem){
             return String.format(clientId +",register,%s;",((Problem) output.get(0)).getType());
