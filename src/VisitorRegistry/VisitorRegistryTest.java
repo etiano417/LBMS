@@ -49,7 +49,9 @@ public class VisitorRegistryTest {
 
         vr.beginVisit(id3, LocalDateTime.now());
         vr.endVisit(id3, LocalTime.now().plusHours(2));
+        assert !vr.isVisiting(id3);
         assert vr.undoEndVisit(id3).equals("success");
+        assert vr.isVisiting(id3);
 
         //Test borrowing books
         List<String> authors = new ArrayList<>();

@@ -47,6 +47,8 @@ public class EndVisit implements Request{
 
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
+        String result = LBMS.vr.undoEndVisit(visitorID);
+        output.add(result);
         return output;
     }
 }
