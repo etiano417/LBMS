@@ -114,14 +114,20 @@ public class User implements Serializable
 
     //Called after each command that is not undoable
     public void clearCommandStack(){
-        commandStack.clear();
-        undoneCommandStack.clear();
+        if (!commandStack.empty()) {
+            commandStack.clear();
+        }
+        if (!undoneCommandStack.empty()) {
+            undoneCommandStack.clear();
+        }
     }
 
     //Called after each undoable command
     public void pushToCommandStack(Request request){
         commandStack.push(request);
-        undoneCommandStack.clear();
+        if (!undoneCommandStack.empty()) {
+            undoneCommandStack.clear();
+        }
     }
 
 }
