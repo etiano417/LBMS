@@ -21,8 +21,24 @@ public class VisitorRegistry {
      * Gives access to the collection of visitors
      * @return visitor collection
      */
-    public Collection<Visitor> getVisitors(){
+    public Collection<Visitor> getVisitors()
+    {
         return visitors;
+    }
+
+    public Collection<Visit> getVisitList()
+    {
+        return visits;
+    }
+
+    public void addVisitFromStartUp(Visit v)
+    {
+        visits.add(v);
+    }
+
+    public void addVisitorFromStartUp(Visitor v)
+    {
+        visitors.add(v);
     }
 
     public Visitor getVisitor(String id) {
