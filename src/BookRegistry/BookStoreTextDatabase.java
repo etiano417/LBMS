@@ -57,6 +57,9 @@ public class BookStoreTextDatabase implements BookStore
         scan.close();
     }
 
+    /**
+     * Search the bookstore for a book title containing the passed in string
+     */
     public List<Book> search(String name)
     {
         ArrayList<Book> toReturn = new ArrayList<>();
@@ -68,17 +71,27 @@ public class BookStoreTextDatabase implements BookStore
         return toReturn;
     }
 
+    /**
+     * Search the bookstore for a book title containing the passed in string and author list.
+     * If the title string was passed in as an '*' search only for authors.
+     */
     public List<Book> search(String name, List<String> authors)
     {
         ArrayList<Book> toReturn = new ArrayList<>();
-        if(name.equals("*")){
-            for (Book b : database) {
+
+        if(name.equals("*"))
+        {
+            for (Book b : database)
+            {
                 if (b.getAuthors().containsAll(authors))
                     toReturn.add(b);
             }
 
-        } else {
-            for (Book b : database) {
+        }
+        else
+        {
+            for (Book b : database)
+            {
                 if (b.getTitle().toLowerCase().contains(name.toLowerCase())
                         && b.getAuthors().containsAll(authors))
                     toReturn.add(b);
@@ -88,16 +101,42 @@ public class BookStoreTextDatabase implements BookStore
         return toReturn;
     }
 
+    /**
+     * Search the bookstore for a book title containing the passed in string, author list, and isbn.
+     * If the title string was passed in as an '*' search only for authors and isbn.
+     * If the title string and authors list were passed in as an '*' search only for isbn.
+     */
     public List<Book> search(String name, List<String> authors, long isbn)
     {
         ArrayList<Book> toReturn = new ArrayList<>();
-        for(Book b:database)
+
+        if(name.equals("*") && authors.get(0).equals("*"))
         {
-            if(b.getTitle().toLowerCase().contains(name.toLowerCase())
-                    && b.getAuthors().containsAll(authors)
-                    && b.getISBN() == isbn)
-                toReturn.add(b);
+            for (Book b : database)
+            {
+                if (b.getISBN()==isbn)
+                    toReturn.add(b);
+            }
         }
+        else if(name.equals("*"))
+        {
+            for (Book b : database)
+            {
+                if (b.getAuthors().containsAll(authors) && b.getISBN()==isbn)
+                    toReturn.add(b);
+            }
+        }
+        else
+        {
+            for (Book b : database)
+            {
+                if (b.getTitle().toLowerCase().contains(name.toLowerCase())
+                        && b.getAuthors().containsAll(authors)
+                        && b.getISBN() == isbn)
+                    toReturn.add(b);
+            }
+        }
+
         return toReturn;
     }
 }
