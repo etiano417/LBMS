@@ -34,7 +34,7 @@ public class GoogleBookStoreProxy implements BookStore{
     }
 
     /**
-     * Search the bookstore for a book title containing the passed in string
+     * Search the Google bookstore for a book title containing the passed in string
      */
     public List<Book> search(String name) {
         String query = getQuery(name);
@@ -42,7 +42,7 @@ public class GoogleBookStoreProxy implements BookStore{
     }
 
     /**
-     * Search the bookstore for a book title containing the passed in string and author list.
+     * Search the Google bookstore for a book title containing the passed in string and author list.
      * If the title string was passed in as an '*' search only for authors.
      */
     public List<Book> search(String name, List<String> authors) {
@@ -56,7 +56,7 @@ public class GoogleBookStoreProxy implements BookStore{
     }
 
     /**
-     * Search the bookstore for a book title containing the passed in string, author list, and isbn.
+     * Search the Google bookstore for a book title containing the passed in string, author list, and isbn.
      * If the title string was passed in as an '*' search only for authors and isbn.
      * If the title string and authors list were passed in as an '*' search only for isbn.
      */
