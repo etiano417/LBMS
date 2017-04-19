@@ -161,7 +161,7 @@ public class UserRegistry {
     }
 
     public void clearDone(String clientId){
-        clients.get(clientId).clearCommandStack();
+        //clients.get(clientId).clearCommandStack();
     }
 
     public boolean undo(String clientId){
