@@ -1,10 +1,13 @@
 package VisitorRegistry;
 
 import java.time.*;
+import java.io.Serializable;
+
 /**
  * Stores data on a single visit.
  */
-public class Visit {
+public class Visit implements Serializable
+{
     private String visitorID;
     private LocalDate dateOfVisit;
     private LocalTime timeOfArrival;

@@ -4,11 +4,13 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
+import java.io.Serializable;
 
 /**
  * Tracks the system time
  */
-public class Clock {
+public class Clock implements Serializable
+{
     private long hoursForward;
     private Collection<ClockObserver> observers;
     private LocalTime openTime;

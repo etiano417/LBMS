@@ -150,4 +150,14 @@ public class BookRegistry
 
         return null;
     }
+
+    public ArrayList<Book> getBookList()
+    {
+        return books;
+    }
+
+    public void addBookFromStartUp(Book b)
+    {
+        books.add(b);
+    }
 }
