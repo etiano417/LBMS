@@ -1,5 +1,6 @@
 package UserInterface;
 
+import LBMS.LBMS;
 import Request.LogOut;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Logout implements UICommand{
         String clientId = params.get(0);
 
         new LogOut(clientId).executeCommand();
+        LBMS.ur.getUser(clientId).clearCommandStack();
 
         return String.format("%s,logout,success",clientId);
     }

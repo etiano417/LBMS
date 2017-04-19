@@ -1,16 +1,19 @@
 package UserRegistry;
 
 import BookRegistry.Book;
-import UserInterface.UICommand;
+//import UserInterface.UICommand;
+import Request.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Represents a single user account in the system
  */
-public class User {
-
+public class User implements Serializable
+{
     //private String username;
     private String password;
     private String id;
@@ -19,8 +22,8 @@ public class User {
     private List<Long> libraryBookOptions;
     private List<Long> borrowedBookOptions;
 
-    //private Stack<UICommand> commandStack;
-    //private Stack<UICommand> undoneCommandStack;
+    private Stack<Request> commandStack;
+    private Stack<Request> undoneCommandStack;
 
     /**
      * Constructs a new user object
@@ -35,6 +38,9 @@ public class User {
         employee = _employee;
         bookStoreOptions = new ArrayList<>();
         libraryBookOptions = new ArrayList<>();
+
+        commandStack = new Stack<Request>();
+        undoneCommandStack = new Stack<Request>();
     }
 
     public User(){
@@ -87,5 +93,35 @@ public class User {
     }
 
     public void setBorrowedSelection(List<Long> bookSelection) { borrowedBookOptions = bookSelection; }
+
+    //undo the most recent undone command
+    public void undo(){
+        if (commandStack.size() > 0) {
+            Request request = commandStack.pop();
+            request.undoCommand();
+            undoneCommandStack.push(request);
+        }
+    }
+
+    //redo the most recent undone command
+    public void redo(){
+        if (undoneCommandStack.size() > 0) {
+            Request request = undoneCommandStack.pop();
+            request.executeCommand();
+            commandStack.push(request);
+        }
+    }
+
+    //Called after each command that is not undoable
+    public void clearCommandStack(){
+        commandStack.clear();
+        undoneCommandStack.clear();
+    }
+
+    //Called after each undoable command
+    public void pushToCommandStack(Request request){
+        commandStack.push(request);
+        undoneCommandStack.clear();
+    }
 
 }

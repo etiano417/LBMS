@@ -1,5 +1,6 @@
 package UserInterface;
 
+import LBMS.LBMS;
 import Request.EndVisit;
 import Request.Problem;
 
@@ -18,9 +19,15 @@ public class Depart implements UICommand {
 
         List<Object> results = null;
         if(params.isEmpty()) {
-            results = new EndVisit(clientId).executeCommand();
+            EndVisit ev = new EndVisit(clientId);
+            //results = new EndVisit(clientId).executeCommand();
+            results = ev.executeCommand();
+            LBMS.ur.getUser(clientId).pushToCommandStack(ev);
         } else {
-            results = new EndVisit(clientId,params.get(0)).executeCommand();
+            EndVisit ev = new EndVisit(clientId, params.get(0));
+            //results = new EndVisit(clientId,params.get(0)).executeCommand();
+            results = ev.executeCommand();
+            LBMS.ur.getUser(clientId).pushToCommandStack(ev);
         }
 
         if(results.get(0) instanceof Problem){

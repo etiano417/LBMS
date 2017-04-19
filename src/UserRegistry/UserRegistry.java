@@ -2,8 +2,6 @@ package UserRegistry;
 
 import java.util.*;
 
-import static com.sun.org.apache.xml.internal.security.keys.keyresolver.KeyResolver.iterator;
-
 /**
  * Responsible for dispensing User objects when offered the proper username and password. Stores all system users.
  */
@@ -23,7 +21,7 @@ public class UserRegistry {
     private List<String> userlessClients = new ArrayList<>();
 
     /**
-     * When given a username and password, returns the cooresponding user.
+     * When given a username and password, returns the corresponding user.
      *
      * @param username the user's username
      * @param password the user's password
@@ -35,6 +33,15 @@ public class UserRegistry {
             return user;
         }
             else return null;
+    }
+
+    /**
+     * Get user from specified user id
+     * @param id The id of the user
+     * @return The user object associated with the id
+     */
+    public User getUser(String id) {
+        return users.get(id);
     }
 
     /**
@@ -148,5 +155,9 @@ public class UserRegistry {
         return clients.get(clientId).getId();
     }
 
+    public Map<String,User> getUserList()
+    {
+        return users;
+    }
 }
 

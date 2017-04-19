@@ -5,7 +5,7 @@ import LBMS.LBMS;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookPurchase {
+public class BookPurchase implements Request{
     public String clientId;
     public int quantity;
     public List<Integer> books;
@@ -59,9 +59,13 @@ public class BookPurchase {
          **/
         return books;
     }
-
+    
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
+        for (int isbn : books) {
+            LBMS.br.removeBook((long)isbn);
+        }
+        output.add("success");
         return output;
     }
 }

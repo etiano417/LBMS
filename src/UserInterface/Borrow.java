@@ -1,5 +1,6 @@
 package UserInterface;
 
+import LBMS.LBMS;
 import Request.BorrowBook;
 import Request.Problem;
 
@@ -22,6 +23,7 @@ public class Borrow implements UICommand {
         }
 
         List<Object> result = bb.executeCommand();
+        LBMS.ur.getUser(clientId).pushToCommandStack(bb);
 
         if(result.get(0) instanceof Problem){
             return String.format("%s,borrow,%s;",clientId,result.get(0));

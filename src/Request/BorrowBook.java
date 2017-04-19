@@ -75,6 +75,18 @@ public class BorrowBook implements Request {
 
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
+        ArrayList<Borrow> borrows = LBMS.vr.findBorrowedBooks(visitorId);
+        for (int isbn : bookIds) {
+            //Return the books to the shelves
+            LBMS.br.returnBook((long) isbn);
+
+            //Remove the books from the visitor's borrowed books
+            for (Borrow b : borrows) {
+                if (b.getBook().getIsbn() == isbn) {
+                    LBMS.vr.getVisitor(visitorId).removeBorrow(b);
+                }
+            }
+        }
         return output;
     }
 }

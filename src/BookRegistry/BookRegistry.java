@@ -136,6 +136,11 @@ public class BookRegistry
         }
     }
 
+    public void removeBook(long isbn) {
+        Book bookToRemove = getBook(isbn);
+        books.remove(books.indexOf(bookToRemove));
+    }
+
     public Book getBook(Long isbn){
         for(Book b : books){
             if(b.getISBN().equals(isbn)){
@@ -144,5 +149,15 @@ public class BookRegistry
         }
 
         return null;
+    }
+
+    public ArrayList<Book> getBookList()
+    {
+        return books;
+    }
+
+    public void addBookFromStartUp(Book b)
+    {
+        books.add(b);
     }
 }

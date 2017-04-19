@@ -37,7 +37,12 @@ public class PayFine implements Request {
 
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
-        output.add(new Problem("cannot-undo", "The most recently executed command cannot be undone."));
+        String result = LBMS.vr.payFine(visitorID, amount * -1);
+        if(!result.equals("success")) {
+            output.add(new Problem(result,""));
+            return output;
+        }
+        output.add("success");
         return output;
     }
 }

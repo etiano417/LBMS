@@ -1,12 +1,13 @@
 package BookRegistry;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 /**
  * Stores data on a single ISBN number.
  */
-public class Book
+public class Book implements Serializable
 {
     private long isbn;
     private String title;

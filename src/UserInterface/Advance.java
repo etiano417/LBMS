@@ -1,5 +1,6 @@
 package UserInterface;
 
+import LBMS.LBMS;
 import Request.AdvanceTime;
 import Request.Problem;
 
@@ -48,6 +49,7 @@ public class Advance implements UICommand{
         }
 
         new AdvanceTime(days,hours).executeCommand();
+        LBMS.ur.getUser(clientId).clearCommandStack();
         return String.format("%s,advance,success;",clientId);
     }
 }

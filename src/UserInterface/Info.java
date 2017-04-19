@@ -1,6 +1,7 @@
 package UserInterface;
 
 import BookRegistry.Book;
+import LBMS.LBMS;
 import Request.LibraryBookSearch;
 
 import java.util.ArrayList;
@@ -41,6 +42,7 @@ public class Info implements UICommand {
         input.add(clientId);
 
         List<Object> results = new LibraryBookSearch(title,input).executeCommand();
+        LBMS.ur.getUser(clientId).clearCommandStack();
 
         List<Book> books = new ArrayList<>();
 
