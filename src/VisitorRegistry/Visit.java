@@ -42,6 +42,5 @@ public class Visit {
         return ongoing;
     }
 
-    //Just for testing purposes
     public LocalDate getDateOfVisit() { return dateOfVisit; }
 }

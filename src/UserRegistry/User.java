@@ -83,13 +83,13 @@ public class User {
         libraryBookOptions = bookSelection;
     }
 
-    private void undo(){
+    public void undo(){
         Request request = commandStack.pop();
         request.undoCommand();
         undoneCommandStack.push(request);
     }
 
-    private void redo(){
+    public void redo(){
         Request request = undoneCommandStack.pop();
         request.executeCommand();
         commandStack.push(request);
