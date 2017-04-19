@@ -4,12 +4,13 @@ import VisitorRegistry.Visitor;
 import VisitorRegistry.VisitorRegistry;
 import Clock.Clock;
 import Clock.ClockObserver;
+import java.io.Serializable;
 
 /**
  * In charge of performing opening and closing operations on the system, and for keeping track of if the library is open
  */
-public class Library implements ClockObserver {
-	
+public class Library implements ClockObserver, Serializable
+{
     private boolean open;
     private Clock clock;
     private VisitorRegistry registry;

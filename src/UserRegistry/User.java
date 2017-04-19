@@ -4,6 +4,7 @@ import BookRegistry.Book;
 //import UserInterface.UICommand;
 import Request.*;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -11,8 +12,8 @@ import java.util.Stack;
 /**
  * Represents a single user account in the system
  */
-public class User {
-
+public class User implements Serializable
+{
     //private String username;
     private String password;
     private String id;

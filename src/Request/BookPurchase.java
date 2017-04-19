@@ -60,8 +60,13 @@ public class BookPurchase {
         return books;
     }
 
+    //Todo: Needs testing
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
+        for (int isbn : books) {
+            LBMS.br.removeBook((long)isbn);
+        }
+        output.add("success");
         return output;
     }
 }

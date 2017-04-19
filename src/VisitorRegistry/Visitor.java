@@ -2,15 +2,15 @@ package VisitorRegistry;
 
 import Transaction.Borrow;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Tyler on 3/13/2017.
  */
 
-public class Visitor {
-
-
+public class Visitor implements Serializable
+{
     private String firstName;
     private String lastName;
     private String address;
@@ -41,7 +41,7 @@ public class Visitor {
     public void addBorrow(Borrow borrow) {
         borrowing.add(borrow);
     }
-    void removeBorrow(Borrow borrow) {
+    public void removeBorrow(Borrow borrow) {
         borrowing.remove(borrow);
     }
     public String getVisitorID() {
