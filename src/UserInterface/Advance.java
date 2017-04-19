@@ -49,7 +49,7 @@ public class Advance implements UICommand{
         }
 
         new AdvanceTime(days,hours).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.ur.getUser(clientId).clearCommandStack();
         return String.format("%s,advance,success;",clientId);
     }
 }

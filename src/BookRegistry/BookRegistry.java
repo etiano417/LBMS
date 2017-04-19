@@ -78,6 +78,7 @@ public class BookRegistry
             if(b.getISBN()==isbn)
             {
                 inLibrary = true;
+                b.returnBook();
                 //if(b.returnBook())
                     //System.out.println("Book return success");
                     //System.out.println("Book return failure");
