@@ -33,7 +33,7 @@ public class Buy implements UICommand {
         BookPurchase bp = new BookPurchase(clientId, quantity, ids);
         //List<Object> result = new BookPurchase(clientId,quantity,ids).executeCommand();
         List<Object> result = bp.executeCommand();
-        LBMS.ur.getUser(clientId).pushToCommandStack(bp);  //Why doesn't this work?
+        LBMS.ur.getUser(clientId).pushToCommandStack(bp);
 
         if(!(result.isEmpty()) && result.get(0) instanceof Problem){
             return String.format("%s,buy,%s;",clientId,result.get(0));

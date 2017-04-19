@@ -85,27 +85,31 @@ public class User implements Serializable
     }
 
     //undo the most recent undone command
-    private void undo(){
-        Request request = commandStack.pop();
-        request.undoCommand();
-        undoneCommandStack.push(request);
+    public void undo(){
+        if (commandStack.size() > 0) {
+            Request request = commandStack.pop();
+            request.undoCommand();
+            undoneCommandStack.push(request);
+        }
     }
 
     //redo the most recent undone command
-    private void redo(){
-        Request request = undoneCommandStack.pop();
-        request.executeCommand();
-        commandStack.push(request);
+    public void redo(){
+        if (undoneCommandStack.size() > 0) {
+            Request request = undoneCommandStack.pop();
+            request.executeCommand();
+            commandStack.push(request);
+        }
     }
 
     //Called after each command that is not undoable
-    private void clearCommandStackS(){
+    public void clearCommandStack(){
         commandStack.clear();
         undoneCommandStack.clear();
     }
 
     //Called after each undoable command
-    private void pushToCommandStack(Request request){
+    public void pushToCommandStack(Request request){
         commandStack.push(request);
         undoneCommandStack.clear();
     }
