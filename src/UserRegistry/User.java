@@ -95,21 +95,25 @@ public class User implements Serializable
     public void setBorrowedSelection(List<Long> bookSelection) { borrowedBookOptions = bookSelection; }
 
     //undo the most recent undone command
-    public void undo(){
+    public boolean undo(){
         if (commandStack.size() > 0) {
             Request request = commandStack.pop();
             request.undoCommand();
             undoneCommandStack.push(request);
+            return true;
         }
+        return false;
     }
 
     //redo the most recent undone command
-    public void redo(){
+    public boolean redo(){
         if (undoneCommandStack.size() > 0) {
             Request request = undoneCommandStack.pop();
             request.executeCommand();
             commandStack.push(request);
+            return true;
         }
+        return false;
     }
 
     //Called after each command that is not undoable

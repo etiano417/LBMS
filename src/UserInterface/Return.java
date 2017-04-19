@@ -5,6 +5,7 @@ import Request.ReturnBook;
 
 import java.util.ArrayList;
 import java.util.List;
+import LBMS.LBMS;
 
 /**
  * Created by Eric Tiano on 4/19/2017.
@@ -37,6 +38,7 @@ public class Return implements UICommand{
         }
 
         List<Object> result = rb.executeCommand();
+        //LBMS.LBMS.ur.getUser(clientId).pushToCommandStack(rb);
 
         if(result.size() == 0){
             return String.format("%s,return,success;",clientId);
@@ -51,6 +53,8 @@ public class Return implements UICommand{
         for(Object o : result){
             ids +=  "" + o + ",";
         }
+
+        LBMS.ur.pushToDone(clientId,rb);
         return String.format("%s,return,overdue,$%.2d,%s;",clientId,fine,ids);
     }
 }

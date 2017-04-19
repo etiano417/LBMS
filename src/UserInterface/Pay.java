@@ -30,11 +30,13 @@ public class Pay implements UICommand{
         }
 
         List<Object> result = pf.executeCommand();
-        LBMS.ur.getUser(clientId).pushToCommandStack(pf);
+        //LBMS.ur.getUser(clientId).pushToCommandStack(pf);
+
         if(result.get(0) instanceof Problem){
             return String.format("%s,pay,%s;",clientId,result.get(0));
         }
 
+        LBMS.ur.pushToDone(clientId,pf);
         int remainingFine = (Integer) result.get(0);
         return String.format("%s,pay,$%d;",clientId,remainingFine);
     }

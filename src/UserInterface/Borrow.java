@@ -23,12 +23,12 @@ public class Borrow implements UICommand {
         }
 
         List<Object> result = bb.executeCommand();
-        LBMS.ur.getUser(clientId).pushToCommandStack(bb);
+        //LBMS.ur.getUser(clientId).pushToCommandStack(bb);
 
         if(result.get(0) instanceof Problem){
             return String.format("%s,borrow,%s;",clientId,result.get(0));
         }
-
+        LBMS.ur.pushToDone(clientId,bb);
         return String.format("%s,borrow,%s;",clientId,result.get(0));
     }
 
@@ -37,6 +37,7 @@ public class Borrow implements UICommand {
         for(String s : input){
             output.add(Integer.parseInt(s));
         }
+
         return output;
     }
 }

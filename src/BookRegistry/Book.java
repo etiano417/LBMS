@@ -82,6 +82,8 @@ public class Book implements Serializable
         return publishDate;
     }
 
+    public int getNumCopies() {return numCopies; }
+
     public int getNumAvailable(){
         return numAvailable;
     }

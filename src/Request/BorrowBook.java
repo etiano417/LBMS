@@ -30,13 +30,12 @@ public class BorrowBook implements Request {
     public List<Object> executeCommand(){
 
         List<Object> output = new ArrayList<>();
-        //TEMPORARY, RESTORE
-        /**
+
         if (!LBMS.library.isOpen()){
             output.add(new Problem("library-closed", ""));
             return output;
         }
-        */
+
         List<Long> isbnList = new ArrayList<>();
         for(int bookId : bookIds) {
             Long isbn = LBMS.ur.selectStoreBook(clientId, bookId);
@@ -87,6 +86,7 @@ public class BorrowBook implements Request {
                 }
             }
         }
+        output.add("success");
         return output;
     }
 }

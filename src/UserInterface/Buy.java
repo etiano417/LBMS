@@ -33,7 +33,7 @@ public class Buy implements UICommand {
         BookPurchase bp = new BookPurchase(clientId, quantity, ids);
         //List<Object> result = new BookPurchase(clientId,quantity,ids).executeCommand();
         List<Object> result = bp.executeCommand();
-        LBMS.ur.getUser(clientId).pushToCommandStack(bp);
+        //LBMS.ur.getUser(clientId).pushToCommandStack(bp);
 
         if(!(result.isEmpty()) && result.get(0) instanceof Problem){
             return String.format("%s,buy,%s;",clientId,result.get(0));
@@ -54,6 +54,8 @@ public class Buy implements UICommand {
             bookOutput = bookOutput + String.format("%d,%s,%s,%s,%d\n",b.getIsbn(),b.getTitle(),authors,b.getPublishDate(),
                     b.getNumAvailable());
         }
+
+        LBMS.ur.pushToDone(clientId,bp);
         return bookOutput;
     }
 }

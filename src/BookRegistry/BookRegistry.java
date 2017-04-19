@@ -57,11 +57,11 @@ public class BookRegistry
                 if(b.checkoutBook())
                 {
                     inLibrary = true;
-                    System.out.println("Book checkout success");
+                    //System.out.println("Book checkout success");
                     return b;
                 }
-                else
-                    System.out.println("Book checkout failure");
+                //else
+                    //System.out.println("Book checkout failure");
             }
         }
         if(!inLibrary)
@@ -78,10 +78,9 @@ public class BookRegistry
             if(b.getISBN()==isbn)
             {
                 inLibrary = true;
-                if(b.returnBook())
-                    System.out.println("Book return success");
-                else
-                    System.out.println("Book return failure");
+                //if(b.returnBook())
+                    //System.out.println("Book return success");
+                    //System.out.println("Book return failure");
             }
         }
         if(!inLibrary)
@@ -131,8 +130,8 @@ public class BookRegistry
 
             if(toAdd.size()>0)
                 books.add(toAdd.get(0));
-            else
-                System.out.println("Book not found in library or database");
+            //else
+                //System.out.println("Book not found in library or database");
         }
     }
 
@@ -159,5 +158,16 @@ public class BookRegistry
     public void addBookFromStartUp(Book b)
     {
         books.add(b);
+    }
+
+    public int numberOfBooks(){
+
+        int count = 0;
+
+        for(Book b : books){
+            count+= b.getNumCopies();
+        }
+
+        return count;
     }
 }
