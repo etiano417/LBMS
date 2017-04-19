@@ -64,6 +64,7 @@ public class UserInterface {
         requests.put("logout", new Logout());
         requests.put("pay", new Pay());
         requests.put("depart", new Depart());
+        requests.put("return", new Return());
 
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());

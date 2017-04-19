@@ -204,10 +204,27 @@ public class VisitorRegistry {
         }
 
         if(!isInRegistry(id)) {
-            return "invalid id";
+            return "invalid-visitor-id";
         }
 
         return "success";
+    }
+
+    public String returnBook(String id, Long isbn){
+
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(id)) {
+                Borrow b = v.getBorrow(isbn);
+                if(b == null){
+                    return "invalid-book-id";
+                }
+
+                return returnBook(id,b);
+            }
+        }
+
+        assert(false); //this point should never be reached
+        return null;
     }
 
     /**
@@ -284,5 +301,14 @@ public class VisitorRegistry {
         Visitor newVisitor = new Visitor(firstName, lastName, address, phoneNumber);
         visitors.add(newVisitor);
         return newVisitor.getVisitorID();
+    }
+
+    public double overdueFee(String visitorId, Long isbn){
+        for (Visitor v : visitors) {
+            if (v.getVisitorID().equals(visitorId)) {
+                return v.overdueFee(isbn);
+            }
+        }
+        return 0;
     }
 }

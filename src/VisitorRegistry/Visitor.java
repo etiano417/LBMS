@@ -21,7 +21,6 @@ public class Visitor {
 
     private static long idTracker = 0;
 
-
     /**
      * Visitor constructor
      * @param first - First name
@@ -41,29 +40,67 @@ public class Visitor {
     public void addBorrow(Borrow borrow) {
         borrowing.add(borrow);
     }
-    void removeBorrow(Borrow borrow) {
+
+    public void removeBorrow(Borrow borrow) {
         borrowing.remove(borrow);
     }
+
+    public Borrow getBorrow(Long isbn){
+        for(Borrow b : borrowing){
+            if(b.getBook().getISBN().equals(isbn)){
+                return b;
+            }
+        }
+        return null;
+    }
+
+    public boolean isBorrowing(Long isbn){
+        for(Borrow b : borrowing){
+            if(b.getBook().getISBN().equals(isbn)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public double overdueFee(Long isbn){
+        for(Borrow b : borrowing){
+            if(b.getBook().getISBN().equals(isbn)){
+                return b.getFee();
+            }
+        }
+
+        return 0;
+    }
+
     public String getVisitorID() {
         return visitorID;
     }
+
     String getFirstName() {
         return firstName;
     }
+
     String getLastName() {
         return lastName;
     }
+
     String getAddress() {
         return address;
     }
+
     String getPhone() {
         return phoneNumber;
     }
+
     ArrayList<Borrow> getBorrowing() {
         return borrowing;
     }
+
     void changeAmountOwed(int amount) { amountOwed += amount; }
+
     int getAmountOwed() { return amountOwed; }
+
     private String generateID(long id) {
         return String.format("%010d", id);
     }

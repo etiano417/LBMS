@@ -2,6 +2,8 @@ package Request;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import BookRegistry.Book;
 import LBMS.LBMS;
 import Transaction.Borrow;
 
@@ -9,9 +11,11 @@ import Transaction.Borrow;
  * returns a list of books borrowed by a given visitor
  */
 public class FindBorrowedBooks implements Request{
+    private String clientID;
     private String visitorID;
 
-    public FindBorrowedBooks(String _visitorID){
+    public FindBorrowedBooks(String _clientID, String _visitorID){
+        clientID = _clientID;
         visitorID = _visitorID;
     }
 
@@ -26,10 +30,16 @@ public class FindBorrowedBooks implements Request{
 
         List<Borrow> borrows = LBMS.vr.findBorrowedBooks(visitorID);
 
-        for(Borrow b : borrows){
+        for(Borrow b : borrows) {
             output.add(b);
         }
 
+        List<Long> books = new ArrayList<>();
+        for(Object o : output){
+            books.add(((Borrow)o).getBook().getISBN());
+        }
+
+        LBMS.ur.setBorrowedSelection(clientID, books);
         return output;
     }
 

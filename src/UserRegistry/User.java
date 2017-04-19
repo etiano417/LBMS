@@ -17,6 +17,7 @@ public class User {
     private boolean employee;
     private List<Long> bookStoreOptions;
     private List<Long> libraryBookOptions;
+    private List<Long> borrowedBookOptions;
 
     //private Stack<UICommand> commandStack;
     //private Stack<UICommand> undoneCommandStack;
@@ -70,6 +71,13 @@ public class User {
         return new Long(-1);
     }
 
+    public Long selectBorrowedBook(int selection){
+        if(selection - 1 < borrowedBookOptions.size()){
+            return borrowedBookOptions.get(selection - 1);
+        }
+        return new Long (-1);
+    }
+
     public void setStoreSelection(List<Long> bookSelection){
         bookStoreOptions = bookSelection;
     }
@@ -78,5 +86,6 @@ public class User {
         libraryBookOptions = bookSelection;
     }
 
+    public void setBorrowedSelection(List<Long> bookSelection) { borrowedBookOptions = bookSelection; }
 
 }

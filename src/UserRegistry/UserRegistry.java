@@ -116,12 +116,20 @@ public class UserRegistry {
         return clients.get(clientId).selectLibraryBook(selection);
     }
 
+    public Long selectBorrowedBook(String clientId,int selection){
+        return clients.get(clientId).selectBorrowedBook(selection);
+    }
+
     public void setStoreSelection(String clientId, List<Long> books){
         clients.get(clientId).setStoreSelection(books);
     }
 
     public void setLibrarySelection(String clientId, List<Long> books){
         clients.get(clientId).setLibrarySelection(books);
+    }
+
+    public void setBorrowedSelection(String clientId, List<Long> books){
+        clients.get(clientId).setBorrowedSelection(books);
     }
 
     public boolean logIn(String userId, String username, String password){

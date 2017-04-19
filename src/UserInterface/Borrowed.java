@@ -24,7 +24,7 @@ public class Borrowed implements UICommand {
             visitorId = params.get(0);
         }
 
-        List<Object> results = new FindBorrowedBooks(visitorId).executeCommand();
+        List<Object> results = new FindBorrowedBooks(clientId,visitorId).executeCommand();
 
         //List<Borrowed> borrows = new ArrayList<>();
 
