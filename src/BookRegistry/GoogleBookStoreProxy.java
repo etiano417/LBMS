@@ -26,15 +26,17 @@ public class GoogleBookStoreProxy implements BookStore{
     URL GoogleURL;
 
     public GoogleBookStoreProxy(File file){
+        //String url = ""; //??
 
+        // Create a URL and open a connection
+        //URL GoogleURL = new URL(url);
+        //HttpURLConnection con = (HttpURLConnection) GoogleURL.openConnection();
     }
 
     /**
      * Search the bookstore for a book title containing the passed in string
      */
     public List<Book> search(String name) {
-        //https://www.googleapis.com/books/v1/volumes?q=search+terms
-        //GET https://www.googleapis.com/books/v1/volumes?q=flowers+inauthor:keyes&key=yourAPIKey
         String query = getQuery(name);
         return null;
     }
@@ -68,7 +70,7 @@ public class GoogleBookStoreProxy implements BookStore{
         return null;
     }
 
-    public String getQuery(String searchTerms){
+    private String getQuery(String searchTerms){
         return "GET https://www.googleapis.com/books/v1/volumes?q=" + searchTerms + "&printType=books&key=AIzaSyATE9oDiwwAFevQkNF428GLMvoIYIestrg";
     }
 }

@@ -37,6 +37,7 @@ public class Return implements UICommand{
         }
 
         List<Object> result = rb.executeCommand();
+        LBMS.LBMS.ur.getUser(clientId).pushToCommandStack(rb);
 
         if(result.size() == 0){
             return String.format("%s,return,success;",clientId);

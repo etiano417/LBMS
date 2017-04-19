@@ -55,6 +55,7 @@ public class VisitorRegistryTest {
         List<String> authors = new ArrayList<>();
         authors.add("yes");
         Borrow b = new Borrow(new Book(123,"yes",authors,"yes", LocalDate.now(),100),LocalDate.now());
+        Borrow bb = new Borrow(new Book(123,"no",authors,"yes", LocalDate.now(),100),LocalDate.now());
         String id4 = vr.RegisterVisitor("King","Diamond","4444","5555");
         assert vr.borrowBook(id4,b).equals("success");
         assert vr.borrowBook("notanid",b).equals("invalid id");
@@ -67,9 +68,13 @@ public class VisitorRegistryTest {
 
         //Test returning book
         assert vr.returnBook(id4,b).equals("success");
-        assert vr.returnBook("notanid",b).equals("invalid id");
+        assert vr.returnBook(id4,bb).equals("success");
+        //assert vr.returnBook("notanid",b).equals("invalid id");
 
-        //Test owes money by creating an a visitor and having them return an overdue book
+        //Test undoing a returned book
+        assert vr.undoReturnBook(id4).equals("success");
+
+        //Test owes money by creating a visitor and having them return an overdue book
         boolean owesMoney = false;
         String id5 = vr.RegisterVisitor("Matt","Damon", "1234", "1234");
         Borrow b2 = new Borrow(new Book(123,"yes",authors,"yes", LocalDate.now(),100),LocalDate.now());

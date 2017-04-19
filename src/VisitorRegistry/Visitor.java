@@ -17,6 +17,7 @@ public class Visitor implements Serializable
     private String phoneNumber;
     private String visitorID;
     private ArrayList<Borrow> borrowing = new ArrayList<>();
+    private ArrayList<Borrow> removedBorrowing;
     private int amountOwed = 0;
 
     private static long idTracker = 0;
@@ -34,6 +35,7 @@ public class Visitor implements Serializable
         address = add;
         phoneNumber = phone;
         borrowing = new ArrayList<Borrow>();
+        removedBorrowing = new ArrayList<Borrow>();
         visitorID = generateID(idTracker++);
     }
 
@@ -43,6 +45,11 @@ public class Visitor implements Serializable
 
     public void removeBorrow(Borrow borrow) {
         borrowing.remove(borrow);
+        removedBorrowing.add(borrow);
+    }
+
+    public Borrow getPreviousBookReturn() {
+        return removedBorrowing.get(removedBorrowing.size() - 1);
     }
 
     public Borrow getBorrow(Long isbn){

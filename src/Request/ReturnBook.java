@@ -91,6 +91,13 @@ public class ReturnBook implements Request {
 
     public List<Object> undoCommand(){
         List<Object> output = new ArrayList<>();
+        //Checkout the books from the book registry, add borrows back to visitor, and adjust the visitor's fine
+        for (int id : bookIds) {
+            LBMS.br.checkoutBook((long) id);
+            LBMS.vr.undoReturnBook(visitorId);
+        }
+
+        output.add("success");
         return output;
     }
 
