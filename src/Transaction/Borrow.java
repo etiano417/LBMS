@@ -4,11 +4,13 @@ import BookRegistry.Book;
 import VisitorRegistry.Visitor;
 
 import java.time.LocalDate;
+import java.io.Serializable;
 
 /**
  * Stores information on a single borrow transaction.
  */
-public class Borrow {
+public class Borrow implements Serializable
+{
     private Book book;
     //public Visitor visitor;
     private LocalDate checkedOut;
