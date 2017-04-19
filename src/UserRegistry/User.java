@@ -84,28 +84,24 @@ public class User implements Serializable
         libraryBookOptions = bookSelection;
     }
 
-    //undo the most recent undone command
-    public void undo(){
+    private void undo(){
         Request request = commandStack.pop();
         request.undoCommand();
         undoneCommandStack.push(request);
     }
 
-    //redo the most recent undone command
-    public void redo(){
+    private void redo(){
         Request request = undoneCommandStack.pop();
         request.executeCommand();
         commandStack.push(request);
     }
 
-    //Called after each command that is not undoable
-    public void clearCommandStackS(){
+    private void clearCommandStackS(){
         commandStack.clear();
         undoneCommandStack.clear();
     }
 
-    //Called after each undoable command
-    public void pushToCommandStack(Request request){
+    private void pushToCommandStack(Request request){
         commandStack.push(request);
         undoneCommandStack.clear();
     }

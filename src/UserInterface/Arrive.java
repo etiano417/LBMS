@@ -24,6 +24,7 @@ public class Arrive implements UICommand {
         }
 
         List<Object> results = bv.executeCommand();
+        LBMS.ur.getUser(clientId).pushToCommandStack(bv);
 
         if(results.get(0) instanceof Problem){
             return String.format("%s,arrive,%s;",clientId,((Problem) results.get(0)).getType());

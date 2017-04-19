@@ -45,6 +45,5 @@ public class Visit implements Serializable
         return ongoing;
     }
 
-    //Just for testing purposes
     public LocalDate getDateOfVisit() { return dateOfVisit; }
 }

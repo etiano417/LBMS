@@ -36,6 +36,15 @@ public class UserRegistry {
     }
 
     /**
+     * Get user from specified user id
+     * @param id The id of the user
+     * @return The user object associated with the id
+     */
+    public User getUser(String id) {
+        return users.get(id);
+    }
+
+    /**
      * adds a user with the given attributes.
      *
      * @param   username the username of the user

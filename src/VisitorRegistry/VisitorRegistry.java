@@ -127,8 +127,6 @@ public class VisitorRegistry {
         return "failed";
     }
 
-
-
     /**
      * The visitor's visit ends.  The visitor's ongoing visit is given a
      * departure time.

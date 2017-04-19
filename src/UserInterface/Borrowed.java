@@ -25,6 +25,7 @@ public class Borrowed implements UICommand {
         }
 
         List<Object> results = new FindBorrowedBooks(visitorId).executeCommand();
+        LBMS.ur.getUser(clientId).clearCommandStack();
 
         //List<Borrowed> borrows = new ArrayList<>();
 
