@@ -65,6 +65,8 @@ public class UserInterface {
         requests.put("pay", new Pay());
         requests.put("depart", new Depart());
         requests.put("return", new Return());
+        requests.put("undo", new UndoCommand());
+        requests.put("redo", new RedoCommand());
 
         //Note: Depart does not work because the stored visit returns ongoing = false
         //requests.put("depart", new Depart());

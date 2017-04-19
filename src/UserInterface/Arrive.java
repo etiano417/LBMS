@@ -24,7 +24,8 @@ public class Arrive implements UICommand {
         }
 
         List<Object> results = bv.executeCommand();
-        LBMS.ur.getUser(clientId).pushToCommandStack(bv);
+        //LBMS.ur.getUser(clientId).pushToCommandStack(bv);
+
 
         if(results.get(0) instanceof Problem){
             return String.format("%s,arrive,%s;",clientId,((Problem) results.get(0)).getType());
@@ -33,6 +34,8 @@ public class Arrive implements UICommand {
         String id = (String) results.get(0);
         LocalDate visitDate = (LocalDate) results.get(1);
         LocalTime visitTime = (LocalTime) results.get(2);
+
+        LBMS.ur.pushToDone(clientId,bv);
 
         return String.format("%s,arrive,%s,%02d/%02d/%d,%02d:%02d:%02d;",clientId,id,visitDate.getDayOfMonth(),
                 visitDate.getMonthValue(), visitDate.getYear(), visitTime.getHour(), visitTime.getMinute(),

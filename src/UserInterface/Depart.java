@@ -17,17 +17,19 @@ public class Depart implements UICommand {
 
         String clientId = params.remove(0);
 
+        EndVisit ev = null;
+
         List<Object> results = null;
         if(params.isEmpty()) {
-            EndVisit ev = new EndVisit(clientId);
+            ev = new EndVisit(clientId);
             //results = new EndVisit(clientId).executeCommand();
             results = ev.executeCommand();
-            LBMS.ur.getUser(clientId).pushToCommandStack(ev);
+            //LBMS.ur.getUser(clientId).pushToCommandStack(ev);
         } else {
-            EndVisit ev = new EndVisit(clientId, params.get(0));
+            ev = new EndVisit(clientId, params.get(0));
             //results = new EndVisit(clientId,params.get(0)).executeCommand();
             results = ev.executeCommand();
-            LBMS.ur.getUser(clientId).pushToCommandStack(ev);
+            //LBMS.ur.getUser(clientId).pushToCommandStack(ev);
         }
 
         if(results.get(0) instanceof Problem){
@@ -48,6 +50,8 @@ public class Depart implements UICommand {
 
         //String time = String.format("%02d:%02d:%02d",hours,minutes,seconds);
         String visitorId = (String) results.get(0);
+
+        LBMS.ur.pushToDone(clientId, ev);
 
         String output = String.format("%s,depart,%s,%02d:%02d:%02d,%02d:%02d:%02d;",clientId,visitorId,endTime.getHour(),
                 endTime.getMinute(),endTime.getSecond(),hours,minutes,seconds);

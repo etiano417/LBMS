@@ -42,7 +42,7 @@ public class Info implements UICommand {
         input.add(clientId);
 
         List<Object> results = new LibraryBookSearch(title,input).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
+        //LBMS.ur.getUser(clientId).clearCommandStack();
 
         List<Book> books = new ArrayList<>();
 
@@ -58,6 +58,7 @@ public class Info implements UICommand {
         }
         output = output + ";";
 
+        LBMS.ur.clearDone(clientId);
         return output;
     }
 }

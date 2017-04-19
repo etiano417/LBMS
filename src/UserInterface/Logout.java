@@ -14,8 +14,8 @@ public class Logout implements UICommand{
         String clientId = params.get(0);
 
         new LogOut(clientId).executeCommand();
-        LBMS.ur.getUser(clientId).clearCommandStack();
-
+        //LBMS.ur.getUser(clientId).clearCommandStack();
+        LBMS.ur.clearDone(clientId);
         return String.format("%s,logout,success",clientId);
     }
 }
